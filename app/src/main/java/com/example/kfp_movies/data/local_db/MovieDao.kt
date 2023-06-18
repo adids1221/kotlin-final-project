@@ -12,7 +12,7 @@ interface MovieDao {
     @Query("SELECT * FROM movies")
     fun getAll(): LiveData<List<Movie>>
 
-    @Query("SELECT * FROM movies WHERE type = :type")
+    /*@Query("SELECT * FROM movies WHERE type = :type")
     fun getAllTrending(type: Int? = 0): LiveData<List<Movie>>
 
     @Query("SELECT * FROM movies WHERE type = :type")
@@ -29,7 +29,7 @@ interface MovieDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertInTheaters(movies: List<Movie>)
-
+*/
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertMovies(movies: List<Movie>)
 }

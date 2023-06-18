@@ -40,11 +40,7 @@ interface MovieService {
         @Query("api_key") api_key: String
     ): Response<CastCrewDetailsResponse>
 
-    @GET("movie/{movie_id}/recommendations")
-    suspend fun getSimilarMovies(
-        @Path("movie_id") movieId: Int,
-        @Query("api_key") api_key: String
-    ): Response<SimilarMoviesResponse>
+
 
     @GET("search/movie")
     suspend fun searchMovies(

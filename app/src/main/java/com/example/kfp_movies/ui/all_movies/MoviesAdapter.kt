@@ -8,6 +8,7 @@ import com.bumptech.glide.Glide
 
 import com.example.kfp_movies.data.models.Movie
 import com.example.kfp_movies.databinding.ItemMovieBinding
+import com.example.kfp_movies.utils.getRating
 
 class MoviesAdapter(private val listener: MovieItemListener) :
     RecyclerView.Adapter<MoviesAdapter.MovieViewHolder>() {
@@ -29,11 +30,13 @@ class MoviesAdapter(private val listener: MovieItemListener) :
         fun bind(item: Movie) {
 
             this.movie = item
-            itemBinding.name.text = item.title
-            itemBinding.speciesAndStatus.text = "${item.overview} "
+            itemBinding.movieTitle.text = item.title
+            itemBinding.movieDescription.text = "${item.overview} "
+            itemBinding.itemRatingBar.rating = item.vote_average?.let { getRating(it) }!!
+            itemBinding.movieReleaseDate.text = item.release_date
             Glide.with(itemBinding.root)
-                .load("https://api.themoviedb.org/3/movie${item.backdropPath}")
-                .into(itemBinding.image)
+                .load("https://image.tmdb.org/t/p/w500${item.poster_path}").centerCrop()
+                .into(itemBinding.moviePoster)
         }
 
         override fun onClick(v: View?) {

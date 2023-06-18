@@ -5,8 +5,10 @@ import android.os.Bundle
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
-import com.example.animetime.R
-import com.example.animetime.databinding.ActivityMainBinding
+import com.example.kfp_movies.R
+import com.example.kfp_movies.databinding.ActivityMainBinding
+
+
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

@@ -1,4 +1,8 @@
+package com.example.kfp_movies.di
 import android.content.Context
+import com.example.kfp_movies.data.local_db.AppDatabase
+import com.example.kfp_movies.data.remote_db.MovieService
+import com.example.kfp_movies.utils.Constants
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import dagger.Module

@@ -1,3 +1,6 @@
+package com.example.kfp_movies.data.remote_db
+
+import com.example.kfp_movies.utils.Resource
 import retrofit2.Response
 abstract class BaseDataSource {
 

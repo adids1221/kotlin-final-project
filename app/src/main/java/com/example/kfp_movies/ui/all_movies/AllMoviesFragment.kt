@@ -1,4 +1,4 @@
-
+package com.example.kfp_movies.ui.all_movies
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,7 +8,10 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.animetime.databinding.MoviesFragmentBinding
+import com.example.kfp_movies.databinding.MoviesFragmentBinding
+import com.example.kfp_movies.utils.Loading
+import com.example.kfp_movies.utils.Success
+import com.example.kfp_movies.utils.autoCleared
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -39,7 +42,7 @@ class AllMoviesFragment : Fragment(), MoviesAdapter.MovieItemListener {
 
         viewModel.movies.observe(viewLifecycleOwner) {
             when(it.status) {
-                is Loading-> binding.progressBar.isVisible = true
+                is Loading -> binding.progressBar.isVisible = true
                 is Success -> {
                     if(!it.status.data.isNullOrEmpty()) {
                         binding.progressBar.isVisible = false
@@ -56,9 +59,9 @@ class AllMoviesFragment : Fragment(), MoviesAdapter.MovieItemListener {
 
     }
 
-    override fun onCharacterClick(characterId: Int) {
-//        findNavController().navigate(R.id.action_allCharactersFragment_to_singleCharacterFragment,
-//            bundleOf("id" to characterId)
-//        )
+
+
+    override fun onMovieClick(movieId: Int) {
+
     }
 }

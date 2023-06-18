@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-
+package com.example.kfp_movies.utils
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.LifecycleOwner

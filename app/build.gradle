@@ -7,7 +7,7 @@ plugins {
 }
 
 android {
-    namespace 'com.example.animetime'
+    namespace 'com.example.kfp_movies'
     compileSdk 33
 
     buildFeatures {

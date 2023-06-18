@@ -1,11 +1,13 @@
-
+package com.example.kfp_movies.ui.all_movies
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.animetime.databinding.ItemMovieBinding
+
+
 import com.example.kfp_movies.data.models.Movie
+import com.example.kfp_movies.databinding.ItemMovieBinding
 
 class MoviesAdapter(private val listener: MovieItemListener) :
     RecyclerView.Adapter<MoviesAdapter.MovieViewHolder>() {
@@ -35,7 +37,7 @@ class MoviesAdapter(private val listener: MovieItemListener) :
         }
 
         override fun onClick(v: View?) {
-            listener.onCharacterClick(movie.id)
+            listener.onMovieClick(movie.id)
         }
     }
 
@@ -58,6 +60,7 @@ class MoviesAdapter(private val listener: MovieItemListener) :
     override fun getItemCount() = movies.size
 
     interface MovieItemListener {
-        fun onCharacterClick(characterId: Int)
+
+        fun onMovieClick(movieId: Int)
     }
 }

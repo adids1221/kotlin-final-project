@@ -1,3 +1,4 @@
+package com.example.kfp_movies.data.models
 import com.example.kfp_movies.data.models.SimilarMovie
 import com.google.gson.annotations.SerializedName
 

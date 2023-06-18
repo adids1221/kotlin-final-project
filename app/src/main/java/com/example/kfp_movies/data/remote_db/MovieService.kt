@@ -1,5 +1,3 @@
-package com.example.kfp_movies.data.remote_db
-
 import com.example.kfp_movies.data.models.*
 import retrofit2.Response
 import retrofit2.http.GET

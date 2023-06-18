@@ -1,4 +1,3 @@
-package il.co.syntax.fullarchitectureretrofithiltkotlin.utils
 /*
  * Copyright (C) 2018 The Android Open Source Project
  *

@@ -1,21 +1,20 @@
-package com.example.kfp_movies.ui.all_movies
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.animetime.databinding.ItemMovieBinding
 import com.example.kfp_movies.data.models.Movie
-import com.example.kfp_movies.databinding.ItemCharacterBinding
 
-class MoviesAdapter(private val listener: CharacterItemListener) :
-    RecyclerView.Adapter<MoviesAdapter.CharacterViewHolder>() {
+class MoviesAdapter(private val listener: MovieItemListener) :
+    RecyclerView.Adapter<MoviesAdapter.MovieViewHolder>() {
 
     private val movies = ArrayList<Movie>()
 
-    class CharacterViewHolder(
-        private val itemBinding: ItemCharacterBinding,
-        private val listener: CharacterItemListener
+    class MovieViewHolder(
+        private val itemBinding: ItemMovieBinding,
+        private val listener: MovieItemListener
     ) : RecyclerView.ViewHolder(itemBinding.root),
         View.OnClickListener {
 
@@ -36,7 +35,7 @@ class MoviesAdapter(private val listener: CharacterItemListener) :
         }
 
         override fun onClick(v: View?) {
-//            listener.onCharacterClick(character.id)
+            listener.onCharacterClick(movie.id)
         }
     }
 
@@ -46,19 +45,19 @@ class MoviesAdapter(private val listener: CharacterItemListener) :
         notifyDataSetChanged()
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CharacterViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder {
         val binding =
-            ItemCharacterBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return CharacterViewHolder(binding, listener)
+            ItemMovieBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return MovieViewHolder(binding, listener)
     }
 
-    override fun onBindViewHolder(holder: CharacterViewHolder, position: Int) =
+    override fun onBindViewHolder(holder: MovieViewHolder, position: Int) =
         holder.bind(movies[position])
 
 
     override fun getItemCount() = movies.size
 
-    interface CharacterItemListener {
+    interface MovieItemListener {
         fun onCharacterClick(characterId: Int)
     }
 }

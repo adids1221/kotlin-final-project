@@ -1,5 +1,3 @@
-package com.example.kfp_movies.data.local_db
-
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room

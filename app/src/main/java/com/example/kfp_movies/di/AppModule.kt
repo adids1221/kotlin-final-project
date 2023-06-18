@@ -1,9 +1,4 @@
-package com.example.kfp_movies.di
-
 import android.content.Context
-import com.example.kfp_movies.data.local_db.AppDatabase
-import com.example.kfp_movies.data.remote_db.MovieService
-import com.example.kfp_movies.utils.Constants
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import dagger.Module
@@ -21,24 +16,24 @@ class AppModule {
 
     @Provides
     @Singleton
-    fun provideRetrofit(gson: Gson) : Retrofit {
+    fun provideRetrofit(gson: Gson): Retrofit {
         return Retrofit.Builder().baseUrl(Constants.BASE_URL)
             .addConverterFactory(GsonConverterFactory.create(gson)).build()
     }
 
     @Provides
-    fun provideGson() : Gson = GsonBuilder().create()
+    fun provideGson(): Gson = GsonBuilder().create()
 
     @Provides
-    fun provideCharacterService(retrofit: Retrofit) : MovieService =
+    fun provideMovieService(retrofit: Retrofit): MovieService =
         retrofit.create(MovieService::class.java)
 
     @Provides
     @Singleton
-    fun provideLocalDataBase(@ApplicationContext appContext: Context) : AppDatabase =
+    fun provideLocalDataBase(@ApplicationContext appContext: Context): AppDatabase =
         AppDatabase.getDatabase(appContext)
 
     @Provides
     @Singleton
-    fun provideCharacterDao(database: AppDatabase) = database.movieDao()
+    fun provideMovieDao(database: AppDatabase) = database.movieDao()
 }

@@ -1,8 +1,3 @@
-package com.example.kfp_movies.data.repository
-
-import com.example.kfp_movies.data.local_db.MovieDao
-import com.example.kfp_movies.data.remote_db.MovieRemoteDataSource
-import il.co.syntax.finalkotlinproject.utils.performFetchingAndSaving
 import javax.inject.Inject
 import javax.inject.Singleton
 

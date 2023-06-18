@@ -1,8 +1,4 @@
-package com.example.kfp_movies.data.remote_db
-
-import il.co.syntax.finalkotlinproject.utils.Resource
 import retrofit2.Response
-
 abstract class BaseDataSource {
 
     protected suspend fun <T>

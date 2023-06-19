@@ -1,13 +1,17 @@
 package com.example.kfp_movies.ui.all_movies
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.kfp_movies.R
 import com.example.kfp_movies.databinding.MoviesFragmentBinding
 import com.example.kfp_movies.utils.Loading
 import com.example.kfp_movies.utils.Success
@@ -46,7 +50,8 @@ class AllMoviesFragment : Fragment(), MoviesAdapter.MovieItemListener {
                 is Success -> {
                     if(!it.status.data.isNullOrEmpty()) {
                         binding.progressBar.isVisible = false
-                        adapter.setMovie(ArrayList(it.status.data))
+                        adapter.setMovies(ArrayList(it.status.data))
+
                     }
                 }
                 is Error -> {
@@ -62,6 +67,11 @@ class AllMoviesFragment : Fragment(), MoviesAdapter.MovieItemListener {
 
 
     override fun onMovieClick(movieId: Int) {
+        findNavController().navigate(R.id.action_allMoviesFragment_to_singleMovieFragment,
+            bundleOf("id" to movieId)
+        )
+
+
 
     }
 }

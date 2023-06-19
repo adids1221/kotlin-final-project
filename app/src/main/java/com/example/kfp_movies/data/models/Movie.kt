@@ -1,12 +1,13 @@
 package com.example.kfp_movies.data.models
 
 import androidx.room.*
+import kotlin.reflect.typeOf
 
 
 @Entity(tableName = "movies")
 data class Movie(
     @PrimaryKey
-    var id: Int,
+    val id: Int ,
     var adult: Boolean,
     val backdrop_path: String?=null,
 //    val genre_ids: ArrayList<Int> = arrayListOf(),
@@ -24,4 +25,7 @@ data class Movie(
     val creditId: String?=null,
     val order: Int,
     var type: Int = 0,
-) {}
+
+) {
+
+}

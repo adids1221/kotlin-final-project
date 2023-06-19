@@ -44,7 +44,7 @@ class MoviesAdapter(private val listener: MovieItemListener) :
         }
     }
 
-    fun setMovie(movies: Collection<Movie>) {
+    fun setMovies(movies: Collection<Movie>) {
         this.movies.clear()
         this.movies.addAll(movies)
         notifyDataSetChanged()

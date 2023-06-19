@@ -16,4 +16,10 @@ class MovieRepository @Inject constructor(
         { remoteDataSource.getTrending() },
         { localDataSource.insertMovies(it.results) }
     )
+
+    fun getMovie(id:Int) = performFetchingAndSaving(
+        {localDataSource.getMovie(id)},
+        {remoteDataSource.getMovie(id)},
+        {localDataSource.insertMovie(it.movie)}
+    )
 }

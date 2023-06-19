@@ -1,6 +1,6 @@
 package com.example.kfp_movies.ui.all_movies
+
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -21,18 +21,18 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class AllMoviesFragment : Fragment(), MoviesAdapter.MovieItemListener {
 
-    private var binding : MoviesFragmentBinding by autoCleared()
+    private var binding: MoviesFragmentBinding by autoCleared()
 
     private val viewModel: AllMoviesViewModel by viewModels()
 
-    private  lateinit var  adapter: MoviesAdapter
+    private lateinit var adapter: MoviesAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = MoviesFragmentBinding.inflate(inflater,container,false)
+        binding = MoviesFragmentBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -43,12 +43,15 @@ class AllMoviesFragment : Fragment(), MoviesAdapter.MovieItemListener {
         adapter = MoviesAdapter(this)
         binding.moviesRv.layoutManager = LinearLayoutManager(requireContext())
         binding.moviesRv.adapter = adapter
+        binding.floatingActionButton.setOnClickListener {
+            binding.moviesRv.smoothScrollToPosition(0)
+        }
 
         viewModel.movies.observe(viewLifecycleOwner) {
-            when(it.status) {
+            when (it.status) {
                 is Loading -> binding.progressBar.isVisible = true
                 is Success -> {
-                    if(!it.status.data.isNullOrEmpty()) {
+                    if (!it.status.data.isNullOrEmpty()) {
                         binding.progressBar.isVisible = false
                         adapter.setMovies(ArrayList(it.status.data))
 
@@ -56,7 +59,7 @@ class AllMoviesFragment : Fragment(), MoviesAdapter.MovieItemListener {
                 }
                 is Error -> {
                     binding.progressBar.isVisible = false
-                    Toast.makeText(requireContext(),it.status.message,Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), it.status.message, Toast.LENGTH_SHORT).show()
                 }
                 else -> {}
             }
@@ -65,13 +68,10 @@ class AllMoviesFragment : Fragment(), MoviesAdapter.MovieItemListener {
     }
 
 
-
     override fun onMovieClick(movieId: Int) {
-        findNavController().navigate(R.id.action_allMoviesFragment_to_singleMovieFragment,
+        findNavController().navigate(
+            R.id.action_allMoviesFragment_to_singleMovieFragment,
             bundleOf("id" to movieId)
         )
-
-
-
     }
 }

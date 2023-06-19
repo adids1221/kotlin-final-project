@@ -1,4 +1,5 @@
 package com.example.kfp_movies.ui.single_movie
+
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -11,12 +12,9 @@ import androidx.fragment.app.viewModels
 import com.bumptech.glide.Glide
 import dagger.hilt.android.AndroidEntryPoint
 import com.example.kfp_movies.databinding.SingleMovieFragmentBinding
-import com.example.kfp_movies.utils.Loading
-import com.example.kfp_movies.utils.Success
-import com.example.kfp_movies.utils.Error
-import com.example.kfp_movies.utils.autoCleared
 
 import com.example.kfp_movies.data.models.Movie
+import com.example.kfp_movies.utils.*
 
 @AndroidEntryPoint
 class SingleMovieFragment : Fragment() {
@@ -24,7 +22,7 @@ class SingleMovieFragment : Fragment() {
 
     private var binding: SingleMovieFragmentBinding by autoCleared()
 
-    private val viewModel:SingleMovieViewModel by viewModels()
+    private val viewModel: SingleMovieViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -40,24 +38,24 @@ class SingleMovieFragment : Fragment() {
 
 
         viewModel.movie.observe(viewLifecycleOwner) {
-            when(it.status) {
-                is Loading-> binding.progressBar.isVisible = true
+            when (it.status) {
+                is Loading -> binding.progressBar.isVisible = true
                 is Success -> {
-                    if(it.status.data!=null) {
+                    if (it.status.data != null) {
                         binding.progressBar.isVisible = false
                         updateMovie(it.status.data!!)
                     }
                 }
                 is Error -> {
                     binding.progressBar.isVisible = false
-                    Toast.makeText(requireContext(),it.status.message,Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), it.status.message, Toast.LENGTH_SHORT).show()
                 }
 
             }
         }
 
         arguments?.getInt("id")?.let {
-            Log.d(it.toString(),it.toString())
+            Log.d(it.toString(), it.toString())
 
             viewModel.setId(it)
         }
@@ -67,13 +65,16 @@ class SingleMovieFragment : Fragment() {
     private fun updateMovie(movie: Movie) {
 
         binding.movieTitle.text = movie.title
-        binding.movieDescription.text= movie.overview
-        binding.movieReleaseDate.text= movie.release_date
-        //Glide.with(requireContext()).load(movie.poster_path).circleCrop().into(binding.moviePoster)
-       /* binding.gender.text = character.gender
-        binding.species.text = character.species
-        binding.status.text = character.status
-        */
+        binding.movieDescription.text = movie.overview
+        binding.movieReleaseDate.text = movie.release_date
+        binding.itemRatingBar.rating = movie.vote_average?.let { getRating(it) }!!
+        Glide.with(binding.root)
+            .load("https://image.tmdb.org/t/p/w500${movie.poster_path}").centerCrop()
+            .into(binding.moviePoster)
+        /* binding.gender.text = character.gender
+         binding.species.text = character.species
+         binding.status.text = character.status
+         */
 
     }
 }

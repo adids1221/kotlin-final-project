@@ -26,7 +26,7 @@ interface MovieService {
     suspend fun getMovie(
         @Path("movie_id") movie_id: Int,
         @Query("api_key") api_key: String
-    ): Response<MovieResponse>
+    ): Response<Movie>
 
     @GET("movie/{movie_id}/casts")
     suspend fun getCasts(

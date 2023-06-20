@@ -39,6 +39,9 @@ class ActorsAdapter(private val listener: ActorItemListener) :
             Glide.with(itemBinding.root)
                 .load("https://image.tmdb.org/t/p/w500${item.profile_path}").centerCrop()
                 .into(itemBinding.profileImage)
+            itemBinding.cardView.setOnClickListener {
+                actor.id?.let { listener.onActorClick(it) }
+            }
 
         }
 

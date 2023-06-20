@@ -1,4 +1,5 @@
 package com.example.kfp_movies.data.repository
+
 import com.example.kfp_movies.data.local_db.MovieDao
 import com.example.kfp_movies.data.remote_db.MovieRemoteDataSource
 import com.example.kfp_movies.utils.performFetchingAndSaving
@@ -15,5 +16,11 @@ class MovieRepository @Inject constructor(
         { localDataSource.getAll() },
         { remoteDataSource.getTrending() },
         { localDataSource.insertMovies(it.results) }
+    )
+
+    fun getMovie(id: Int) = performFetchingAndSaving(
+        { localDataSource.getMovie(id) },
+        { remoteDataSource.getMovie(id) },
+        { localDataSource.insertMovie(it) }
     )
 }

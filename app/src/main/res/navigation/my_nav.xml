@@ -9,5 +9,14 @@
         android:id="@+id/allMoviesFragment"
         android:name="com.example.kfp_movies.ui.all_movies.AllMoviesFragment"
         android:label="movies_fragment"
-        tools:layout="@layout/movies_fragment" />
+        tools:layout="@layout/movies_fragment" >
+        <action
+            android:id="@+id/action_allMoviesFragment_to_singleMovieFragment"
+            app:destination="@id/singleMovieFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/singleMovieFragment"
+        android:name="com.example.kfp_movies.ui.single_movie.SingleMovieFragment"
+        android:label="single_movie_fragment"
+        tools:layout="@layout/single_movie_fragment" />
 </navigation>

@@ -1,4 +1,6 @@
 package com.example.kfp_movies.ui.all_movies
+
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -37,14 +39,17 @@ class MoviesAdapter(private val listener: MovieItemListener) :
             Glide.with(itemBinding.root)
                 .load("https://image.tmdb.org/t/p/w500${item.poster_path}").centerCrop()
                 .into(itemBinding.moviePoster)
+            itemBinding.favStar.setOnCheckedChangeListener { _, isChecked ->
+                Log.d(item.title, "This movie ${item.title} has been marked!")
+            }
         }
 
         override fun onClick(v: View?) {
-            listener.onMovieClick(movie.id)
+            movie.id?.let { listener.onMovieClick(it) }
         }
     }
 
-    fun setMovie(movies: Collection<Movie>) {
+    fun setMovies(movies: Collection<Movie>) {
         this.movies.clear()
         this.movies.addAll(movies)
         notifyDataSetChanged()

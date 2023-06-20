@@ -20,5 +20,5 @@ interface ActorDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertActors(actors: List<Actor>)
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertMovie(actor: Actor)
+    suspend fun insertActor(actor: Actor)
 }

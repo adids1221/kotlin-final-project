@@ -80,6 +80,9 @@ class AllActorsFragment : Fragment(), ActorsAdapter.ActorItemListener {
 
 
     override fun onActorClick(actorId: Int) {
-        TODO("Not yet implemented")
+        findNavController().navigate(
+            R.id.action_allActorsFragment_to_singleActorFragment,
+            bundleOf("id" to actorId)
+        )
     }
 }

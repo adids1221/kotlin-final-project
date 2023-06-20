@@ -6,10 +6,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
+import com.example.kfp_movies.R
 import dagger.hilt.android.AndroidEntryPoint
 import com.example.kfp_movies.databinding.SingleMovieFragmentBinding
 
@@ -30,6 +33,7 @@ class SingleMovieFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = SingleMovieFragmentBinding.inflate(inflater, container, false)
+
         return binding.root
     }
 
@@ -57,7 +61,15 @@ class SingleMovieFragment : Fragment() {
         arguments?.getInt("id")?.let {
             Log.d(it.toString(), it.toString())
 
+
             viewModel.setId(it)
+        }
+        val movieId = arguments?.getInt("id")
+        binding.showActorsBtn.setOnClickListener{
+            findNavController().navigate(
+                R.id.action_singleMovieFragment_to_allActorsFragment,
+                bundleOf("id" to movieId)
+            )
         }
 
     }
@@ -75,6 +87,7 @@ class SingleMovieFragment : Fragment() {
          binding.species.text = character.species
          binding.status.text = character.status
          */
+
 
     }
 }

@@ -95,7 +95,15 @@
                 android:textAlignment="center"
                 android:textColor="@color/white"
                 android:textSize="20sp" />
+            <Button
+                android:id="@+id/show_actors_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="Show Actors"
+                android:textSize="12sp" />
 
         </LinearLayout>
+
     </ScrollView>
 </LinearLayout>

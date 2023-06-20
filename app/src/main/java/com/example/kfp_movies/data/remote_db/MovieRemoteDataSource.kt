@@ -10,4 +10,10 @@ class MovieRemoteDataSource @Inject constructor(
 
     suspend fun getMovie(id: Int) =
         getResult { movieService.getMovie(id, "8e5ba8495daddc6d2438bfc535daa646") }
+
+    suspend fun getCasts(id:Int) =
+        getResult { movieService.getCasts(id,"8e5ba8495daddc6d2438bfc535daa646") }
+
+    suspend fun getActorDetails(id: Int) =
+        getResult { movieService.getActorDetails(id,"8e5ba8495daddc6d2438bfc535daa646") }
 }

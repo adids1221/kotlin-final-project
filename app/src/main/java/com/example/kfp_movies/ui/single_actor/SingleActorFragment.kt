@@ -56,6 +56,7 @@ class SingleActorFragment : Fragment() {
                     Toast.makeText(requireContext(), it.status.message, Toast.LENGTH_SHORT).show()
                 }
 
+                else -> {}
             }
         }
 

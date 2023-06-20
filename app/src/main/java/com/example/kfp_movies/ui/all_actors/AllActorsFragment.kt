@@ -11,12 +11,9 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.GridLayoutManager
 import com.example.kfp_movies.R
 import com.example.kfp_movies.databinding.ActorsFragmentBinding
-import com.example.kfp_movies.databinding.MoviesFragmentBinding
-import com.example.kfp_movies.ui.all_movies.AllMoviesViewModel
-import com.example.kfp_movies.ui.all_movies.MoviesAdapter
 import com.example.kfp_movies.utils.Loading
 import com.example.kfp_movies.utils.Success
 import com.example.kfp_movies.utils.autoCleared
@@ -45,11 +42,11 @@ class AllActorsFragment : Fragment(), ActorsAdapter.ActorItemListener {
         super.onViewCreated(view, savedInstanceState)
 
         adapter = ActorsAdapter(this)
-        binding.actorsRv.layoutManager = LinearLayoutManager(requireContext())
+        binding.actorsRv.layoutManager = GridLayoutManager(requireContext(), 3)
         binding.actorsRv.adapter = adapter
-        /*binding.floatingActionButton.setOnClickListener {
-            binding.moviesRv.smoothScrollToPosition(0)
-        }*/
+        binding.floatingActionButton.setOnClickListener {
+            binding.actorsRv.smoothScrollToPosition(0)
+        }
 
         viewModel.actors.observe(viewLifecycleOwner) {
             when (it.status) {
@@ -75,8 +72,6 @@ class AllActorsFragment : Fragment(), ActorsAdapter.ActorItemListener {
         }
 
     }
-
-
 
 
     override fun onActorClick(actorId: Int) {

@@ -44,4 +44,8 @@ class AppModule {
     @Provides
     @Singleton
     fun provideActorDao(database: AppDatabase) = database.actorDao()
+
+    @Provides
+    @Singleton
+    fun provideFavouriteDao(database: AppDatabase) = database.favouriteDao()
 }

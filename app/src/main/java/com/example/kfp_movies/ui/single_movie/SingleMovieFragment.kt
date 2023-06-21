@@ -13,6 +13,8 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.example.kfp_movies.R
+import com.example.kfp_movies.data.local_db.FavouriteDao
+import com.example.kfp_movies.data.models.FavouriteRequest
 import dagger.hilt.android.AndroidEntryPoint
 import com.example.kfp_movies.databinding.SingleMovieFragmentBinding
 
@@ -26,6 +28,7 @@ class SingleMovieFragment : Fragment() {
     private var binding: SingleMovieFragmentBinding by autoCleared()
 
     private val viewModel: SingleMovieViewModel by viewModels()
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -71,8 +74,17 @@ class SingleMovieFragment : Fragment() {
                 bundleOf("id" to movieId)
             )
         }
+        binding.addToFavouriteBtn.setOnClickListener{
+           val favouriteRequest = FavouriteRequest("movie",movieId,true)
+          viewModel.addToFavourites(favouriteRequest)
+
+        }
 
     }
+
+
+
+
 
     private fun updateMovie(movie: Movie) {
 

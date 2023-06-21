@@ -13,6 +13,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.kfp_movies.R
 import com.example.kfp_movies.databinding.MoviesFragmentBinding
+import com.example.kfp_movies.ui.all_favourites.AllFavouritesViewModel
 import com.example.kfp_movies.utils.Loading
 import com.example.kfp_movies.utils.Success
 import com.example.kfp_movies.utils.autoCleared
@@ -24,6 +25,10 @@ class AllMoviesFragment : Fragment(), MoviesAdapter.MovieItemListener {
     private var binding: MoviesFragmentBinding by autoCleared()
 
     private val viewModel: AllMoviesViewModel by viewModels()
+
+
+
+
 
     private lateinit var adapter: MoviesAdapter
 
@@ -58,6 +63,14 @@ class AllMoviesFragment : Fragment(), MoviesAdapter.MovieItemListener {
         binding.floatingActionButton.setOnClickListener {
             binding.moviesRv.smoothScrollToPosition(0)
         }
+        binding.favourites.setOnClickListener {
+            findNavController().navigate(
+                R.id.action_allMoviesFragment_to_allFavouritesFragment,
+
+            )
+        }
+
+
 
         viewModel.movies.observe(viewLifecycleOwner) {
             when (it.status) {

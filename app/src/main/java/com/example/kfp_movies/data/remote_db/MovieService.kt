@@ -1,9 +1,8 @@
 package com.example.kfp_movies.data.remote_db
 import com.example.kfp_movies.data.models.*
+import com.google.gson.Gson
 import retrofit2.Response
-import retrofit2.http.GET
-import retrofit2.http.Path
-import retrofit2.http.Query
+import retrofit2.http.*
 
 interface MovieService {
 
@@ -58,5 +57,21 @@ suspend fun getCasts(
         @Query("query") query: String,
         @Query("api_key") api_key: String
     ): Response<SearchResultResponse>
+
+
+    @POST("account/{account_id}/favorite")
+    suspend fun addToFavourites(
+        @Path("account_id") accountId: Int,
+        @Query("api_key") apiKey: String,
+        @Header("Authorization") bearerToken: String,
+        @Body favoriteRequest: FavouriteRequest
+    ): Response<FavouriteResponse>
+    @Headers("Content-Type: application/json;charset=utf-8")
+    @GET("account/{account_id}/favorite/movies")
+    suspend fun getFavourites(
+        @Path("account_id") accountId: Int,
+        //@Query("api_key") apiKey: String,
+        @Header("Authorization") bearerToken: String,
+    ): Response<MoviesResponse>
 
 }

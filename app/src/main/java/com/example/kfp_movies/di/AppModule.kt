@@ -40,4 +40,8 @@ class AppModule {
     @Provides
     @Singleton
     fun provideMovieDao(database: AppDatabase) = database.movieDao()
+
+    @Provides
+    @Singleton
+    fun provideActorDao(database: AppDatabase) = database.actorDao()
 }

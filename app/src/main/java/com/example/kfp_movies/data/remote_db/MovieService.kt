@@ -27,7 +27,7 @@ interface MovieService {
         @Path("movie_id") movie_id: Int,
         @Query("api_key") api_key: String
     ): Response<Movie>
-
+/*
     @GET("movie/{movie_id}/casts")
     suspend fun getCasts(
         @Path("movie_id") movieId: Int,
@@ -40,7 +40,18 @@ interface MovieService {
         @Query("api_key") api_key: String
     ): Response<CastCrewDetailsResponse>
 
+*/
+@GET("movie/{movie_id}/casts")
+suspend fun getCasts(
+    @Path("movie_id") movieId: Int,
+    @Query("api_key") api_key: String
+): Response<ActorsResponse>
 
+    @GET("person/{person_id}")
+    suspend fun getActorDetails(
+        @Path("person_id") personId: Int,
+        @Query("api_key") api_key: String
+    ): Response<Actor>
 
     @GET("search/movie")
     suspend fun searchMovies(

@@ -41,6 +41,18 @@ class AllMoviesFragment : Fragment(), MoviesAdapter.MovieItemListener {
         super.onViewCreated(view, savedInstanceState)
 
         adapter = MoviesAdapter(this)
+        binding.search.setOnQueryTextListener(object :
+            androidx.appcompat.widget.SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                adapter.filter.filter(newText)
+                return false
+            }
+
+        })
         binding.moviesRv.layoutManager = LinearLayoutManager(requireContext())
         binding.moviesRv.adapter = adapter
         binding.floatingActionButton.setOnClickListener {

@@ -15,6 +15,8 @@ interface MovieDao {
     @Query("SELECT * FROM movies WHERE id = :id")
     fun getMovie(id:Int) : LiveData<Movie>
 
+
+
     /*@Query("SELECT * FROM movies WHERE type = :type")
     fun getAllTrending(type: Int? = 0): LiveData<List<Movie>>
 

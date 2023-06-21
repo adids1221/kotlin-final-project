@@ -4,6 +4,8 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Filter
+import android.widget.Filterable
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 
@@ -13,9 +15,14 @@ import com.example.kfp_movies.databinding.ItemMovieBinding
 import com.example.kfp_movies.utils.getRating
 
 class MoviesAdapter(private val listener: MovieItemListener) :
-    RecyclerView.Adapter<MoviesAdapter.MovieViewHolder>() {
+    RecyclerView.Adapter<MoviesAdapter.MovieViewHolder>(), Filterable {
 
     private val movies = ArrayList<Movie>()
+    private var moviesFilterList = ArrayList<Movie>()
+
+    init {
+        moviesFilterList = movies
+    }
 
     class MovieViewHolder(
         private val itemBinding: ItemMovieBinding,
@@ -52,6 +59,8 @@ class MoviesAdapter(private val listener: MovieItemListener) :
     fun setMovies(movies: Collection<Movie>) {
         this.movies.clear()
         this.movies.addAll(movies)
+        moviesFilterList.clear()
+        moviesFilterList.addAll(movies)
         notifyDataSetChanged()
     }
 
@@ -62,10 +71,38 @@ class MoviesAdapter(private val listener: MovieItemListener) :
     }
 
     override fun onBindViewHolder(holder: MovieViewHolder, position: Int) =
-        holder.bind(movies[position])
+        holder.bind(moviesFilterList[position])
 
+    override fun getFilter(): Filter {
+        return object : Filter() {
+            override fun performFiltering(constraint: CharSequence?): FilterResults {
+                val filterPattern = constraint.toString()
+                if (filterPattern.isEmpty()) {
+                    moviesFilterList = movies
+                } else {
+                    val resultList = ArrayList<Movie>()
+                    for (movie in movies) {
+                        if (movie.title?.lowercase()?.contains(filterPattern) == true
+                        ) {
+                            resultList.add(movie)
+                        }
+                    }
+                    moviesFilterList = resultList
+                }
+                val filterResults = FilterResults()
+                filterResults.values = moviesFilterList
+                return filterResults
+            }
 
-    override fun getItemCount() = movies.size
+            override fun publishResults(constraint: CharSequence?, results: FilterResults?) {
+                moviesFilterList = results?.values as ArrayList<Movie>
+                notifyDataSetChanged()
+            }
+
+        }
+    }
+
+    override fun getItemCount() = moviesFilterList.size
 
     interface MovieItemListener {
 

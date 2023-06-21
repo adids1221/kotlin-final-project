@@ -9,8 +9,11 @@
     <string name="movie_title_placeholder">Movie Title</string>
     <string name="movie_players_placeholder">Players</string>
     <string name="movie_release_date_placeholder">Movie Release Date</string>
-    <string name="movie_rating_placeholder"> Movie Rating</string>
-    <string name="movie_dsc_placeholder"> Movie Description</string>
+    <string name="movie_rating_placeholder">Movie Rating</string>
+    <string name="movie_dsc_placeholder">Movie Description</string>
+    <string name="actor_title_placeholder">Actor name</string>
+    <string name="actor_role_placeholder">Actor role</string>
+    <string name="show_actor_btn">Show Actors</string>
     <string name="save_movie_btn">Submit</string>
     <string name="update_movie_btn">Update</string>
     <string name="required">Required</string>

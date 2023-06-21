@@ -16,9 +16,11 @@ interface ActorDao {
     @Query("SELECT * FROM actors WHERE id = :id")
     fun getActor(id:Int) : LiveData<Actor>
 
-
+    @Query("DELETE FROM actors")
+    suspend fun clearActorsTable()
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertActors(actors: List<Actor>)
     @Insert(onConflict = OnConflictStrategy.REPLACE)
+
     suspend fun insertActor(actor: Actor)
 }

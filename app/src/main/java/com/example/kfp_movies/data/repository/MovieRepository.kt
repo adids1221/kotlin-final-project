@@ -29,7 +29,9 @@ class MovieRepository @Inject constructor(
     fun getCasts(id: Int) = performFetchingAndSaving(
         {actorsLocalDataSource.getAllActors()},
         {remoteDataSource.getCasts(id)},
-        {actorsLocalDataSource.insertActors(it.cast)}
+        {actorsLocalDataSource.clearActorsTable()
+          actorsLocalDataSource.insertActors(it.cast)
+        }
     )
 
     fun getActor(id: Int) = performFetchingAndSaving(

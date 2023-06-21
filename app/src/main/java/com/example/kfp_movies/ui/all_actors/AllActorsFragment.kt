@@ -68,6 +68,7 @@ class AllActorsFragment : Fragment(), ActorsAdapter.ActorItemListener {
         arguments?.getInt("id")?.let {
             Log.d(it.toString(), it.toString())
 
+
             viewModel.setId(it)
         }
 

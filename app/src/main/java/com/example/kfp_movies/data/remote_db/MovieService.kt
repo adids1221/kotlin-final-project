@@ -1,4 +1,5 @@
 package com.example.kfp_movies.data.remote_db
+
 import com.example.kfp_movies.data.models.*
 import retrofit2.Response
 import retrofit2.http.GET
@@ -27,25 +28,39 @@ interface MovieService {
         @Path("movie_id") movie_id: Int,
         @Query("api_key") api_key: String
     ): Response<Movie>
-/*
+
+    @GET("movie/{movie_id}/similar")
+    suspend fun getSimilar(
+        @Path("movie_id") movie_id: Int,
+        @Query("api_key") api_key: String
+    ): Response<MoviesResponse>
+
+
+    @GET("movie/{movie_id}/recommendations")
+    suspend fun getRecommendations(
+        @Path("movie_id") movie_id: Int,
+        @Query("api_key") api_key: String
+    ): Response<MoviesResponse>
+
+    /*
+        @GET("movie/{movie_id}/casts")
+        suspend fun getCasts(
+            @Path("movie_id") movieId: Int,
+            @Query("api_key") api_key: String
+        ): Response<CastAndCrewResponse>
+
+        @GET("person/{person_id}")
+        suspend fun getCastCrewDetails(
+            @Path("person_id") personId: Int,
+            @Query("api_key") api_key: String
+        ): Response<CastCrewDetailsResponse>
+
+    */
     @GET("movie/{movie_id}/casts")
     suspend fun getCasts(
         @Path("movie_id") movieId: Int,
         @Query("api_key") api_key: String
-    ): Response<CastAndCrewResponse>
-
-    @GET("person/{person_id}")
-    suspend fun getCastCrewDetails(
-        @Path("person_id") personId: Int,
-        @Query("api_key") api_key: String
-    ): Response<CastCrewDetailsResponse>
-
-*/
-@GET("movie/{movie_id}/casts")
-suspend fun getCasts(
-    @Path("movie_id") movieId: Int,
-    @Query("api_key") api_key: String
-): Response<ActorsResponse>
+    ): Response<ActorsResponse>
 
     @GET("person/{person_id}")
     suspend fun getActorDetails(

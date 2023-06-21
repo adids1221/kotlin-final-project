@@ -27,16 +27,29 @@ class MovieRepository @Inject constructor(
     )
 
     fun getCasts(id: Int) = performFetchingAndSaving(
-        {actorsLocalDataSource.getAllActors()},
-        {remoteDataSource.getCasts(id)},
-        {actorsLocalDataSource.clearActorsTable()
-          actorsLocalDataSource.insertActors(it.cast)
+        { actorsLocalDataSource.getAllActors() },
+        { remoteDataSource.getCasts(id) },
+        {
+            actorsLocalDataSource.clearActorsTable()
+            actorsLocalDataSource.insertActors(it.cast)
         }
     )
 
     fun getActor(id: Int) = performFetchingAndSaving(
-        {actorsLocalDataSource.getActor(id)},
-        {remoteDataSource.getActorDetails(id)},
-        {actorsLocalDataSource.insertActor(it)}
+        { actorsLocalDataSource.getActor(id) },
+        { remoteDataSource.getActorDetails(id) },
+        { actorsLocalDataSource.insertActor(it) }
+    )
+
+    fun getSimilar(id: Int) = performFetchingAndSaving(
+        { localDataSource.getAll() },
+        { remoteDataSource.getSimilar(id) },
+        { localDataSource.insertMovies(it.results) }
+    )
+
+    fun getRecommendations(id: Int) = performFetchingAndSaving(
+        { localDataSource.getAll() },
+        { remoteDataSource.getRecommendations(id) },
+        { localDataSource.insertMovies(it.results) }
     )
 }

@@ -22,6 +22,9 @@
         <action
             android:id="@+id/action_singleMovieFragment_to_allActorsFragment"
             app:destination="@id/allActorsFragment" />
+        <action
+            android:id="@+id/action_singleMovieFragment_to_similarFragment3"
+            app:destination="@id/similarFragment3" />
     </fragment>
     <fragment
         android:id="@+id/allActorsFragment"
@@ -37,4 +40,9 @@
         android:name="com.example.kfp_movies.ui.single_actor.SingleActorFragment"
         android:label="single_actor_fragment"
         tools:layout="@layout/single_actor_fragment" />
+    <fragment
+        android:id="@+id/similarFragment3"
+        android:name="com.example.kfp_movies.ui.single_movie_similar.SimilarFragment"
+        android:label="similar_fragment"
+        tools:layout="@layout/similar_fragment" />
 </navigation>

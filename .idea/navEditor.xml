@@ -17,6 +17,15 @@
                             <option name="y" value="18" />
                           </Point>
                         </option>
+                        <option name="myPositions">
+                          <map>
+                            <entry key="action_allActorsFragment_to_singleActorFragment">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                          </map>
+                        </option>
                       </LayoutPositions>
                     </value>
                   </entry>
@@ -41,6 +50,18 @@
                       </LayoutPositions>
                     </value>
                   </entry>
+                  <entry key="similarFragment3">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="415" />
+                            <option name="y" value="-354" />
+                          </Point>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
                   <entry key="singleActorFragment">
                     <value>
                       <LayoutPositions>
@@ -58,13 +79,18 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="304" />
+                            <option name="x" value="276" />
                             <option name="y" value="27" />
                           </Point>
                         </option>
                         <option name="myPositions">
                           <map>
                             <entry key="action_singleMovieFragment_to_allActorsFragment">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                            <entry key="action_singleMovieFragment_to_similarFragment3">
                               <value>
                                 <LayoutPositions />
                               </value>

@@ -8,6 +8,5 @@ import javax.inject.Inject
 class AllMoviesViewModel @Inject constructor(
     movieRepository: MovieRepository
 ) : ViewModel() {
-
     val movies = movieRepository.getTrending()
 }

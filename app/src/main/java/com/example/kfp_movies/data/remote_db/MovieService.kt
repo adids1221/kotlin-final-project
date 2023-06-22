@@ -1,4 +1,5 @@
 package com.example.kfp_movies.data.remote_db
+
 import com.example.kfp_movies.data.models.*
 import com.google.gson.Gson
 import retrofit2.Response
@@ -26,25 +27,38 @@ interface MovieService {
         @Path("movie_id") movie_id: Int,
         @Query("api_key") api_key: String
     ): Response<Movie>
-/*
+
+    @GET("movie/{movie_id}")
+    suspend fun getSimilarMovie(
+        @Path("movie_id") movie_id: Int,
+        @Query("api_key") api_key: String
+    ): Response<SimilarMovie>
+
+    @GET("movie/{movie_id}/similar")
+    suspend fun getSimilar(
+        @Path("movie_id") movie_id: Int,
+        @Query("api_key") api_key: String
+    ): Response<SimilarMoviesResponse>
+
+
+    @GET("movie/{movie_id}/recommendations")
+    suspend fun getRecommendations(
+        @Path("movie_id") movie_id: Int,
+        @Query("api_key") api_key: String
+    ): Response<RecommendedMoviesResponse>
+
+    @GET("movie/{movie_id}")
+    suspend fun getRecommended(
+        @Path("movie_id") movie_id: Int,
+        @Query("api_key") api_key: String
+    ): Response<RecommendedMovie>
+
+
     @GET("movie/{movie_id}/casts")
     suspend fun getCasts(
         @Path("movie_id") movieId: Int,
         @Query("api_key") api_key: String
-    ): Response<CastAndCrewResponse>
-
-    @GET("person/{person_id}")
-    suspend fun getCastCrewDetails(
-        @Path("person_id") personId: Int,
-        @Query("api_key") api_key: String
-    ): Response<CastCrewDetailsResponse>
-
-*/
-@GET("movie/{movie_id}/casts")
-suspend fun getCasts(
-    @Path("movie_id") movieId: Int,
-    @Query("api_key") api_key: String
-): Response<ActorsResponse>
+    ): Response<ActorsResponse>
 
     @GET("person/{person_id}")
     suspend fun getActorDetails(
@@ -59,19 +73,21 @@ suspend fun getCasts(
     ): Response<SearchResultResponse>
 
 
+    @Headers(
+        "accept: application/json",
+        "content-type: application/json"
+    )
     @POST("account/{account_id}/favorite")
-    suspend fun addToFavourites(
+    suspend fun addToFavorites(
         @Path("account_id") accountId: Int,
-        @Query("api_key") apiKey: String,
         @Header("Authorization") bearerToken: String,
         @Body favoriteRequest: FavouriteRequest
     ): Response<FavouriteResponse>
-    @Headers("Content-Type: application/json;charset=utf-8")
+
     @GET("account/{account_id}/favorite/movies")
-    suspend fun getFavourites(
+    suspend fun getFavorites(
         @Path("account_id") accountId: Int,
-        //@Query("api_key") apiKey: String,
         @Header("Authorization") bearerToken: String,
-    ): Response<MoviesResponse>
+    ): Response<FavoriteListResponse>
 
 }

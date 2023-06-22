@@ -29,7 +29,6 @@ class SingleMovieFragment : Fragment() {
 
     private val viewModel: SingleMovieViewModel by viewModels()
 
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -62,44 +61,45 @@ class SingleMovieFragment : Fragment() {
         }
 
         arguments?.getInt("id")?.let {
-            Log.d(it.toString(), it.toString())
-
-
             viewModel.setId(it)
         }
         val movieId = arguments?.getInt("id")
-        binding.showActorsBtn.setOnClickListener{
+        binding.showActorsBtn.setOnClickListener {
             findNavController().navigate(
                 R.id.action_singleMovieFragment_to_allActorsFragment,
                 bundleOf("id" to movieId)
             )
         }
-        binding.addToFavouriteBtn.setOnClickListener{
-           val favouriteRequest = FavouriteRequest("movie",movieId,true)
-          viewModel.addToFavourites(favouriteRequest)
-
+        binding.showRecommendationsBtn.setOnClickListener {
+            findNavController().navigate(
+                R.id.action_singleMovieFragment_to_recommendationsFragment2,
+                bundleOf("id" to movieId)
+            )
         }
+        binding.showSimilarBtn.setOnClickListener {
+            findNavController().navigate(
+                R.id.action_singleMovieFragment_to_similarFragment3,
+                bundleOf("id" to movieId)
+            )
+        }
+
 
     }
 
-
-
-
-
     private fun updateMovie(movie: Movie) {
-
         binding.movieTitle.text = movie.title
         binding.movieDescription.text = movie.overview
         binding.movieReleaseDate.text = movie.release_date
         binding.itemRatingBar.rating = movie.vote_average?.let { getRating(it) }!!
         Glide.with(binding.root)
-            .load("https://image.tmdb.org/t/p/w500${movie.poster_path}").centerCrop()
+            .load("https://image.tmdb.org/t/p/w500${movie.poster_path}")
+            .placeholder(R.drawable.glide_placeholder)
+            .centerCrop()
             .into(binding.moviePoster)
-        /* binding.gender.text = character.gender
-         binding.species.text = character.species
-         binding.status.text = character.status
-         */
-
-
+        binding.favStar.setOnCheckedChangeListener { _, isChecked ->
+            Log.d(movie.title, "This movie ${movie.title} has been marked!")
+            val req = FavouriteRequest(movie.id, isChecked)
+            viewModel.addToFavorites(req)
+        }
     }
 }

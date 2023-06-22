@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -7,7 +6,7 @@
     android:background="@color/pale_black"
     android:gravity="center_horizontal"
     android:orientation="vertical"
-    tools:context=".ui.single_actor.SingleActorFragment">
+    tools:context=".ui.single_recommended_movie.SingleRecommendedMovieFragment">
 
     <ProgressBar
         android:id="@+id/progress_bar"
@@ -24,13 +23,13 @@
         android:orientation="horizontal">
 
         <ImageView
-            android:id="@+id/actor_profile"
+            android:id="@+id/movie_poster"
             android:layout_width="170dp"
             android:layout_height="220dp"
-            android:layout_marginLeft="10dp"
+            android:layout_marginStart="10dp"
             android:layout_marginTop="16dp"
             android:layout_weight="1"
-            android:contentDescription="actor_biography"
+            android:contentDescription="@string/poster_desc"
             tools:srcCompat="@tools:sample/avatars" />
 
 
@@ -38,36 +37,22 @@
 
 
     <TextView
-        android:id="@+id/actor_name"
+        android:id="@+id/movie_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="Actor Name"
+        android:text="@string/movie_title_placeholder"
         android:textAlignment="center"
         android:textColor="@color/white"
         android:textSize="30sp"
         android:textStyle="bold" />
 
     <TextView
-        android:id="@+id/place_of_birth"
+        android:id="@+id/movie_release_date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:contentDescription="Place Of Birth"
-        android:drawablePadding="5dp"
-        android:text="Place Of Birth"
-        android:textAlignment="center"
-        android:textColor="@color/white"
-        android:textSize="18sp"
-        app:drawableStartCompat="@drawable/baseline_place_24" />
-
-
-    <TextView
-        android:id="@+id/actor_birthday"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:contentDescription="Birthday"
+        android:contentDescription="@string/insert_image"
         android:drawablePadding="5dp"
         android:text="@string/movie_release_date_placeholder"
         android:textAlignment="center"
@@ -77,35 +62,17 @@
 
 
     <RatingBar
-        android:id="@+id/actor_rating_bar"
+        android:id="@+id/item_rating_bar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="10dp"
         android:isIndicator="true"
         android:numStars="5"
         android:progressTint="@color/gold_rating_bar"
         android:stepSize="0.5" />
 
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
-        android:orientation="horizontal">
-
-        <Button
-            android:id="@+id/movie_credits_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="@string/movie_credits_btn"
-            android:textSize="11sp" />
-
-    </LinearLayout>
-
-
     <ScrollView
-        android:id="@+id/actor_biography_scrollView"
+        android:id="@+id/movie_description_scrollView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="16dp"
@@ -119,10 +86,10 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/actor_biography"
+                android:id="@+id/movie_description"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="16dp"
                 android:text="@string/dummy_text"
                 android:textAlignment="center"
                 android:textColor="@color/white"

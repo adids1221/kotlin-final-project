@@ -2,10 +2,9 @@ package com.example.kfp_movies.data.models
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.example.kfp_movies.utils.getRating
 
-@Entity(tableName = "favourites")
-data class FavouriteMovie(
+@Entity(tableName = "similar_movies")
+data class SimilarMovie(
     @PrimaryKey
     val id: Int? = null,
     var adult: Boolean? = null,
@@ -24,6 +23,7 @@ data class FavouriteMovie(
     val creditId: String? = null,
     val order: Int,
     var type: Int = 0,
-) {
+
+    ) {
 
 }

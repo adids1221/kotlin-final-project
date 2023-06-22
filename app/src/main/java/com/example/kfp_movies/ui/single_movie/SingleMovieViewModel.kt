@@ -1,11 +1,8 @@
 package com.example.kfp_movies.ui.single_movie
 
 import androidx.lifecycle.*
-import com.example.kfp_movies.data.models.FavouriteMovie
 import com.example.kfp_movies.data.models.FavouriteRequest
-import com.example.kfp_movies.data.models.Movie
 import com.example.kfp_movies.data.repository.MovieRepository
-import com.example.kfp_movies.utils.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -33,9 +30,9 @@ class SingleMovieViewModel @Inject constructor(
         movieRepository.insertToFavourites(movie)
 
     }*/
-    fun addToFavourites(favouriteRequest: FavouriteRequest) {
+    fun addToFavorites(favouriteRequest: FavouriteRequest) {
         viewModelScope.launch {
-            movieRepository.addToFavourites(favouriteRequest)
+            movieRepository.addToFavorites(favouriteRequest)
         }
     }
 }

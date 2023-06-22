@@ -12,14 +12,15 @@ import com.example.kfp_movies.data.models.Movie
 interface FavouriteDao {
 
     @Query("SELECT * FROM favourites")
-    fun getAll(): LiveData<List<Movie>>
+    fun getAllFavorite(): LiveData<List<FavouriteMovie>>
 
     @Query("SELECT * FROM favourites WHERE id = :id")
-    fun getMovie(id:Int) : LiveData<Movie>
+    fun getFavoriteMovie(id: Int): LiveData<FavouriteMovie>
 
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertMovies(favouriteMovies: List<Movie>)
+    suspend fun insertFavoriteMovies(favouriteMovies: List<FavouriteMovie>)
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertMovie(favouriteMovie: Movie)
+    suspend fun insertFavoriteMovie(favouriteMovie: FavouriteMovie)
 }

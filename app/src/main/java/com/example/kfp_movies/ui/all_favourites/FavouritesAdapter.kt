@@ -16,7 +16,7 @@ class FavouritesAdapter(private val listener: FavouriteItemListener) :
     RecyclerView.Adapter<FavouritesAdapter.FavouriteViewHolder>() {
 
 
-    private val favourites = ArrayList<Movie>()
+    private val favourites = ArrayList<FavouriteMovie>()
 
     class FavouriteViewHolder(
         private val itemBinding: ItemFavouriteBinding,
@@ -25,13 +25,13 @@ class FavouritesAdapter(private val listener: FavouriteItemListener) :
         View.OnClickListener {
 
 
-        private lateinit var favouriteMovie: Movie
+        private lateinit var favouriteMovie: FavouriteMovie
 
         init {
             itemBinding.root.setOnClickListener(this)
         }
 
-        fun bind(item: Movie) {
+        fun bind(item: FavouriteMovie) {
 
             this.favouriteMovie = item
             itemBinding.movieTitle.text = item.title
@@ -49,7 +49,7 @@ class FavouritesAdapter(private val listener: FavouriteItemListener) :
         }
     }
 
-    fun setFavourites(favourites: Collection<Movie>) {
+    fun setFavourites(favourites: Collection<FavouriteMovie>) {
         this.favourites.clear()
         this.favourites.addAll(favourites)
         notifyDataSetChanged()

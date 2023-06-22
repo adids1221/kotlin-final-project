@@ -16,7 +16,7 @@ class AllFavouritesViewModel @Inject constructor(
     movieRepository: MovieRepository
 ) : ViewModel() {
 
-    val favouriteMovies= movieRepository.getFavourites()
+    val favouriteMovies= movieRepository.getFavorites()
     //val favouriteMovies:LiveData<List<Movie>>? = movieRepository.getFavour()
 
 

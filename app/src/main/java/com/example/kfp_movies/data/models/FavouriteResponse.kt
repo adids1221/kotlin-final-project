@@ -6,6 +6,4 @@ data class FavouriteResponse(
     val success: Boolean,
     val status_code: Int,
     val status_message: String
-) {
-
-}
+) {}

@@ -1,4 +1,4 @@
-package com.example.kfp_movies.ui.all_actors
+package com.example.kfp_movies.ui.all_recommendation_movies
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -8,11 +8,12 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
-class AllActorsViewModel @Inject constructor(
-    private val movieRepository: MovieRepository
+class RecommendationsViewModel @Inject constructor(
+    movieRepository: MovieRepository
 ) : ViewModel() {
+
     private val _id = MutableLiveData<Int>()
-    val actors = _id.switchMap { movieRepository.getCasts(it) }
+    val movies = _id.switchMap { movieRepository.getRecommendationsMovies(it) }
     fun setId(id: Int) {
         _id.value = id
     }

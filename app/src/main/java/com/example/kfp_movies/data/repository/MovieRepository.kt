@@ -2,6 +2,7 @@ package com.example.kfp_movies.data.repository
 
 import com.example.kfp_movies.data.local_db.ActorDao
 import com.example.kfp_movies.data.local_db.MovieDao
+import com.example.kfp_movies.data.local_db.RecommendedDao
 import com.example.kfp_movies.data.local_db.SimilarDao
 import com.example.kfp_movies.data.remote_db.MovieRemoteDataSource
 import com.example.kfp_movies.utils.performFetchingAndSaving
@@ -13,7 +14,9 @@ class MovieRepository @Inject constructor(
     private val remoteDataSource: MovieRemoteDataSource,
     private val localDataSource: MovieDao,
     private val actorsLocalDataSource: ActorDao,
-    private val similarsLocalDataSource:SimilarDao
+    private val similarLocalDataSource: SimilarDao,
+    private val recommendedLocalDataSource: RecommendedDao
+
 ) {
 
     fun getTrending() = performFetchingAndSaving(
@@ -44,20 +47,32 @@ class MovieRepository @Inject constructor(
     )
 
     fun getSimilarMovies(id: Int) = performFetchingAndSaving(
-        { similarsLocalDataSource.getAllSimilar() },
+        { similarLocalDataSource.getAllSimilar() },
         { remoteDataSource.getSimilar(id) },
-        {similarsLocalDataSource.clearSimilarTable()
-         similarsLocalDataSource.insertSimilarMovies(it.results) }
-    )
-   fun getSimilarMovie(id: Int) = performFetchingAndSaving(
-        { similarsLocalDataSource.getSimilarMovie(id) },
-        { remoteDataSource.getSimilarMovie(id) },
-        { similarsLocalDataSource.insertSimilarMovie(it) }
+        {
+            similarLocalDataSource.clearSimilarTable()
+            similarLocalDataSource.insertSimilarMovies(it.results)
+        }
     )
 
-    /*fun getRecommendations(id: Int) = performFetchingAndSaving(
-        { similarsLocalDataSource.getAll() },
+    fun getSimilarMovie(id: Int) = performFetchingAndSaving(
+        { similarLocalDataSource.getSimilarMovie(id) },
+        { remoteDataSource.getSimilarMovie(id) },
+        { similarLocalDataSource.insertSimilarMovie(it) }
+    )
+
+    fun getRecommendationsMovies(id: Int) = performFetchingAndSaving(
+        { recommendedLocalDataSource.getAllRecommended() },
         { remoteDataSource.getRecommendations(id) },
-        { similarsLocalDataSource.insertMovies(it.results) }
-    )*/
+        {
+            recommendedLocalDataSource.clearRecommendedTable()
+            recommendedLocalDataSource.insertRecommendedMovies(it.results)
+        }
+    )
+
+    fun getRecommendedMovie(id: Int) = performFetchingAndSaving(
+        { recommendedLocalDataSource.getRecommendedMovie(id) },
+        { remoteDataSource.getRecommended(id) },
+        { recommendedLocalDataSource.insertRecommendedMovie(it) }
+    )
 }

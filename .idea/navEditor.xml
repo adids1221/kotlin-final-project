@@ -50,6 +50,27 @@
                       </LayoutPositions>
                     </value>
                   </entry>
+                  <entry key="recommendationsFragment2">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="427" />
+                            <option name="y" value="414" />
+                          </Point>
+                        </option>
+                        <option name="myPositions">
+                          <map>
+                            <entry key="action_recommendationsFragment2_to_singleRecommendedMovieFragment">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                          </map>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
                   <entry key="similarFragment3">
                     <value>
                       <LayoutPositions>
@@ -58,6 +79,15 @@
                             <option name="x" value="415" />
                             <option name="y" value="-354" />
                           </Point>
+                        </option>
+                        <option name="myPositions">
+                          <map>
+                            <entry key="action_similarFragment3_to_singleSimilarMovieFragment">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                          </map>
                         </option>
                       </LayoutPositions>
                     </value>
@@ -90,12 +120,29 @@
                                 <LayoutPositions />
                               </value>
                             </entry>
+                            <entry key="action_singleMovieFragment_to_recommendationsFragment2">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
                             <entry key="action_singleMovieFragment_to_similarFragment3">
                               <value>
                                 <LayoutPositions />
                               </value>
                             </entry>
                           </map>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
+                  <entry key="singleRecommendedMovieFragment">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="705" />
+                            <option name="y" value="418" />
+                          </Point>
                         </option>
                       </LayoutPositions>
                     </value>

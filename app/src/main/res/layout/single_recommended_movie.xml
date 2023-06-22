@@ -6,7 +6,7 @@
     android:background="@color/pale_black"
     android:gravity="center_horizontal"
     android:orientation="vertical"
-    tools:context=".ui.single_similar_movie.SingleSimilarMovieFragment">
+    tools:context=".ui.single_recommended_movie.SingleRecommendedMovieFragment">
 
     <ProgressBar
         android:id="@+id/progress_bar"
@@ -60,6 +60,7 @@
         android:textSize="18sp"
         app:drawableStartCompat="@drawable/baseline_date_range_24" />
 
+
     <RatingBar
         android:id="@+id/item_rating_bar"
         android:layout_width="wrap_content"
@@ -93,6 +94,9 @@
                 android:textAlignment="center"
                 android:textColor="@color/white"
                 android:textSize="20sp" />
+
+
         </LinearLayout>
+
     </ScrollView>
 </LinearLayout>

@@ -66,9 +66,7 @@ class SimilarFragment : Fragment(), SimilarAdapter.SimilarItemListener {
         arguments?.getInt("id")?.let {
             viewModel.setId(it)
         }
-
     }
-
 
     override fun onMovieClick(movieId: Int) {
         findNavController().navigate(

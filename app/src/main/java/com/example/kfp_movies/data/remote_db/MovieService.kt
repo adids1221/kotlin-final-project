@@ -46,7 +46,13 @@ interface MovieService {
     suspend fun getRecommendations(
         @Path("movie_id") movie_id: Int,
         @Query("api_key") api_key: String
-    ): Response<MoviesResponse>
+    ): Response<RecommendedMoviesResponse>
+
+    @GET("movie/{movie_id}")
+    suspend fun getRecommended(
+        @Path("movie_id") movie_id: Int,
+        @Query("api_key") api_key: String
+    ): Response<RecommendedMovie>
 
 
     @GET("movie/{movie_id}/casts")

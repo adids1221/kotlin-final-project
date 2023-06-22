@@ -2,6 +2,7 @@ package com.example.kfp_movies.data.repository
 
 import com.example.kfp_movies.data.local_db.ActorDao
 import com.example.kfp_movies.data.local_db.MovieDao
+import com.example.kfp_movies.data.local_db.SimilarDao
 import com.example.kfp_movies.data.remote_db.MovieRemoteDataSource
 import com.example.kfp_movies.utils.performFetchingAndSaving
 import javax.inject.Inject
@@ -11,7 +12,8 @@ import javax.inject.Singleton
 class MovieRepository @Inject constructor(
     private val remoteDataSource: MovieRemoteDataSource,
     private val localDataSource: MovieDao,
-    private val actorsLocalDataSource: ActorDao
+    private val actorsLocalDataSource: ActorDao,
+    private val similarsLocalDataSource:SimilarDao
 ) {
 
     fun getTrending() = performFetchingAndSaving(
@@ -41,15 +43,21 @@ class MovieRepository @Inject constructor(
         { actorsLocalDataSource.insertActor(it) }
     )
 
-    fun getSimilar(id: Int) = performFetchingAndSaving(
-        { localDataSource.getAll() },
+    fun getSimilarMovies(id: Int) = performFetchingAndSaving(
+        { similarsLocalDataSource.getAllSimilar() },
         { remoteDataSource.getSimilar(id) },
-        { localDataSource.insertMovies(it.results) }
+        {similarsLocalDataSource.clearSimilarTable()
+         similarsLocalDataSource.insertSimilarMovies(it.results) }
+    )
+   fun getSimilarMovie(id: Int) = performFetchingAndSaving(
+        { similarsLocalDataSource.getSimilarMovie(id) },
+        { remoteDataSource.getSimilarMovie(id) },
+        { similarsLocalDataSource.insertSimilarMovie(it) }
     )
 
-    fun getRecommendations(id: Int) = performFetchingAndSaving(
-        { localDataSource.getAll() },
+    /*fun getRecommendations(id: Int) = performFetchingAndSaving(
+        { similarsLocalDataSource.getAll() },
         { remoteDataSource.getRecommendations(id) },
-        { localDataSource.insertMovies(it.results) }
-    )
+        { similarsLocalDataSource.insertMovies(it.results) }
+    )*/
 }

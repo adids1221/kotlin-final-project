@@ -5,12 +5,14 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.example.kfp_movies.data.models.Actor
 import com.example.kfp_movies.data.models.Movie
+import com.example.kfp_movies.data.models.SimilarMovie
 
-@Database(entities = [Movie::class, Actor::class], version = 1, exportSchema = false)
+@Database(entities = [Movie::class, Actor::class,SimilarMovie::class], version = 2, exportSchema = false)
 abstract class AppDatabase : RoomDatabase() {
 
     abstract fun movieDao(): MovieDao
     abstract fun actorDao(): ActorDao
+    abstract fun similarDao():SimilarDao
 
     companion object {
 
@@ -22,7 +24,7 @@ abstract class AppDatabase : RoomDatabase() {
                 Room.databaseBuilder(
                     context.applicationContext,
                     AppDatabase::class.java,
-                    "movies"
+                    "a_n_a_db"
                 )
                     .fallbackToDestructiveMigration().build().also {
                         instance = it

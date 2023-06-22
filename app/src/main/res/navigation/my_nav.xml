@@ -42,7 +42,19 @@
         tools:layout="@layout/single_actor_fragment" />
     <fragment
         android:id="@+id/similarFragment3"
-        android:name="com.example.kfp_movies.ui.single_movie_similar.SimilarFragment"
+        android:name="com.example.kfp_movies.ui.all_similar_movies.SimilarFragment"
         android:label="similar_fragment"
-        tools:layout="@layout/similar_fragment" />
+        tools:layout="@layout/similar_fragment" >
+        <action
+            android:id="@+id/action_similarFragment3_to_singleSimilarMovieFragment"
+            app:destination="@id/singleSimilarMovieFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/singleSimilarMovieFragment"
+        android:name="com.example.kfp_movies.ui.single_similar_movie.SingleSimilarMovieFragment"
+        android:label="SingleSimilarMovieFragment" >
+        <action
+            android:id="@+id/action_singleSimilarMovieFragment_to_allActorsFragment"
+            app:destination="@id/allActorsFragment" />
+    </fragment>
 </navigation>

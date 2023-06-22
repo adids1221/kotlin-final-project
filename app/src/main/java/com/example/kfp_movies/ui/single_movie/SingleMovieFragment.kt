@@ -12,19 +12,26 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.example.kfp_movies.R
+import com.example.kfp_movies.data.local_db.AppDatabase
+import com.example.kfp_movies.data.local_db.FavoriteDao
+import com.example.kfp_movies.data.models.FavoriteMovie
 import dagger.hilt.android.AndroidEntryPoint
 import com.example.kfp_movies.databinding.SingleMovieFragmentBinding
-
 import com.example.kfp_movies.data.models.Movie
 import com.example.kfp_movies.utils.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class SingleMovieFragment : Fragment() {
-
-
     private var binding: SingleMovieFragmentBinding by autoCleared()
 
     private val viewModel: SingleMovieViewModel by viewModels()
+
+    @Inject
+    lateinit var movieDatabase: AppDatabase
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -32,14 +39,11 @@ class SingleMovieFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = SingleMovieFragmentBinding.inflate(inflater, container, false)
-
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-
         viewModel.movie.observe(viewLifecycleOwner) {
             when (it.status) {
                 is Loading -> binding.progressBar.isVisible = true
@@ -83,6 +87,23 @@ class SingleMovieFragment : Fragment() {
     }
 
     private fun updateMovie(movie: Movie) {
+        val favoriteDao = movieDatabase.favoriteDao()
+        val favoriteMovie = FavoriteMovie(
+            id = movie.id,
+            title = movie.title,
+            overview = movie.overview,
+            release_date = movie.release_date,
+            vote_average = movie.vote_average,
+            poster_path = movie.poster_path
+        )
+
+        binding.favStar.setOnCheckedChangeListener { _, isChecked ->
+            if (isChecked) {
+                addMovieToFavorites(favoriteMovie, favoriteDao)
+            } else {
+                deleteFavoriteMovie(favoriteMovie, favoriteDao)
+            }
+        }
 
         binding.movieTitle.text = movie.title
         binding.movieDescription.text = movie.overview
@@ -94,4 +115,23 @@ class SingleMovieFragment : Fragment() {
             .centerCrop()
             .into(binding.moviePoster)
     }
+
+
+    private fun addMovieToFavorites(movie: FavoriteMovie, favoriteDao: FavoriteDao) {
+
+        GlobalScope.launch(Dispatchers.IO) {
+            favoriteDao.insertFavoriteMovie(movie)
+        }
+        Toast.makeText(requireContext(), "Added to favorites", Toast.LENGTH_SHORT).show()
+    }
+
+    private fun deleteFavoriteMovie(movie: FavoriteMovie, favoriteDao: FavoriteDao) {
+
+        GlobalScope.launch(Dispatchers.IO) {
+            favoriteDao.deleteFavoriteMovie(movie)
+        }
+        Toast.makeText(requireContext(), "Removed from favorites", Toast.LENGTH_SHORT).show()
+    }
+
+
 }

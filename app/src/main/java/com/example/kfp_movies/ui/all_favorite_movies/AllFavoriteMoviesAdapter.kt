@@ -1,42 +1,40 @@
-package com.example.kfp_movies.ui.all_recommendation_movies
+package com.example.kfp_movies.ui.all_favorite_movies
 
-import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.kfp_movies.R
-import com.example.kfp_movies.data.models.RecommendedMovie
+import com.example.kfp_movies.data.models.FavoriteMovie
 import com.example.kfp_movies.databinding.ItemMovieBinding
 import com.example.kfp_movies.utils.getRating
 
-class RecommendationsAdapter(private val listener: RecommendedItemListener) :
-    RecyclerView.Adapter<RecommendationsAdapter.RecommendedViewHolder>() {
+class AllFavoriteMoviesAdapter(private val listener: FavoriteItemListener) :
+    RecyclerView.Adapter<AllFavoriteMoviesAdapter.FavoriteViewHolder>() {
 
-    private val movies = ArrayList<RecommendedMovie>()
+    private val movies = ArrayList<FavoriteMovie>()
 
-    class RecommendedViewHolder(
+    class FavoriteViewHolder(
         private val itemBinding: ItemMovieBinding,
-        private val listener: RecommendedItemListener
+        private val listener: FavoriteItemListener
     ) : RecyclerView.ViewHolder(itemBinding.root),
         View.OnClickListener {
 
-        private lateinit var movie: RecommendedMovie
+        private lateinit var movie: FavoriteMovie
 
         init {
             itemBinding.root.setOnClickListener(this)
         }
 
-        @SuppressLint("SuspiciousIndentation")
-        fun bind(item: RecommendedMovie) {
+        fun bind(item: FavoriteMovie) {
             this.movie = item
             itemBinding.movieTitle.text = item.title
             itemBinding.movieDescription.text = "${item.overview} "
             itemBinding.itemRatingBar.rating = item.vote_average?.let { getRating(it) }!!
             itemBinding.movieReleaseDate.text = item.release_date
-              Glide.with(itemBinding.root)
-                .load("https://image.tmdb.org/t/p/w500${movie.poster_path}")
+            Glide.with(itemBinding.root)
+                .load("https://image.tmdb.org/t/p/w500${item.poster_path}")
                 .placeholder(R.drawable.glide_placeholder)
                 .centerCrop()
                 .into(itemBinding.moviePoster)
@@ -47,25 +45,26 @@ class RecommendationsAdapter(private val listener: RecommendedItemListener) :
         }
     }
 
-    fun setMovies(movies: Collection<RecommendedMovie>) {
+    fun setMovies(movies: Collection<FavoriteMovie>) {
         this.movies.clear()
         this.movies.addAll(movies)
         notifyDataSetChanged()
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecommendedViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FavoriteViewHolder {
         val binding =
             ItemMovieBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return RecommendedViewHolder(binding, listener)
+        return FavoriteViewHolder(binding, listener)
     }
 
-    override fun onBindViewHolder(holder: RecommendedViewHolder, position: Int) =
+    override fun onBindViewHolder(holder: FavoriteViewHolder, position: Int) =
         holder.bind(movies[position])
 
 
     override fun getItemCount() = movies.size
 
-    interface RecommendedItemListener {
+    interface FavoriteItemListener {
+
         fun onMovieClick(movieId: Int)
     }
 }

@@ -58,6 +58,11 @@ class AllMoviesFragment : Fragment(), MoviesAdapter.MovieItemListener {
         binding.floatingActionButton.setOnClickListener {
             binding.moviesRv.smoothScrollToPosition(0)
         }
+        binding.showFavBtn.setOnClickListener {
+            findNavController().navigate(
+                R.id.action_allMoviesFragment_to_allFavoriteMoviesFragment
+            )
+        }
 
         viewModel.movies.observe(viewLifecycleOwner) {
             when (it.status) {

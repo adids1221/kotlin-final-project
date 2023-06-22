@@ -1,6 +1,5 @@
 package com.example.kfp_movies.ui.all_movies
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -47,9 +46,6 @@ class MoviesAdapter(private val listener: MovieItemListener) :
                 .placeholder(R.drawable.glide_placeholder)
                 .centerCrop()
                 .into(itemBinding.moviePoster)
-            itemBinding.favStar.setOnCheckedChangeListener { _, isChecked ->
-                Log.d(item.title, "This movie ${item.title} has been marked!")
-            }
         }
 
         override fun onClick(v: View?) {

@@ -12,6 +12,7 @@ class SingleMovieViewModel @Inject constructor(
 ) : ViewModel() {
     private val _id = MutableLiveData<Int>()
     val movie = _id.switchMap { movieRepository.getMovie(it) }
+
     fun setId(id: Int) {
         _id.value = id
     }

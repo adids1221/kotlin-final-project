@@ -16,6 +16,4 @@ class AllActorsViewModel @Inject constructor(
     fun setId(id: Int) {
         _id.value = id
     }
-
-
 }

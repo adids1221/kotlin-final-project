@@ -1,4 +1,5 @@
 package com.example.kfp_movies.di
+
 import android.content.Context
 import com.example.kfp_movies.data.local_db.AppDatabase
 import com.example.kfp_movies.data.remote_db.MovieService
@@ -44,4 +45,12 @@ class AppModule {
     @Provides
     @Singleton
     fun provideActorDao(database: AppDatabase) = database.actorDao()
+
+    @Provides
+    @Singleton
+    fun provideSimilarDao(database: AppDatabase) = database.similarDao()
+
+    @Provides
+    @Singleton
+    fun provideRecommendedDao(database: AppDatabase) = database.recommendedDao()
 }

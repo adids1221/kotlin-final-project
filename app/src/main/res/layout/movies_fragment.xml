@@ -58,6 +58,7 @@
             android:contentDescription="@string/fab_content_desc"
             android:focusable="true"
             android:src="@drawable/baseline_arrow_upward_24"
+            app:borderWidth="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             tools:ignore="MissingConstraints" />

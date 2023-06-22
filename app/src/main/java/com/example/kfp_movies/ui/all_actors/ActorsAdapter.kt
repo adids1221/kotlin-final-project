@@ -1,16 +1,13 @@
 package com.example.kfp_movies.ui.all_actors
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.kfp_movies.R
 import com.example.kfp_movies.data.models.Actor
-import com.example.kfp_movies.data.models.Movie
 import com.example.kfp_movies.databinding.ItemActorBinding
-import com.example.kfp_movies.databinding.ItemMovieBinding
-import com.example.kfp_movies.utils.getRating
 
 class ActorsAdapter(private val listener: ActorItemListener) :
     RecyclerView.Adapter<ActorsAdapter.ActorViewHolder>() {
@@ -37,8 +34,11 @@ class ActorsAdapter(private val listener: ActorItemListener) :
             itemBinding.actorName.text = item.name
             itemBinding.movieCharacter.text = item.character
             Glide.with(itemBinding.root)
-                .load("https://image.tmdb.org/t/p/w500${item.profile_path}").centerCrop()
+                .load("https://image.tmdb.org/t/p/w500${item.profile_path}")
+                .placeholder(R.drawable.glide_placeholder)
+                .centerCrop()
                 .into(itemBinding.profileImage)
+
             itemBinding.cardView.setOnClickListener {
                 actor.id?.let { listener.onActorClick(it) }
             }

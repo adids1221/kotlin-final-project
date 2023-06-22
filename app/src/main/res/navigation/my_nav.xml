@@ -22,6 +22,12 @@
         <action
             android:id="@+id/action_singleMovieFragment_to_allActorsFragment"
             app:destination="@id/allActorsFragment" />
+        <action
+            android:id="@+id/action_singleMovieFragment_to_similarFragment3"
+            app:destination="@id/similarFragment3" />
+        <action
+            android:id="@+id/action_singleMovieFragment_to_recommendationsFragment2"
+            app:destination="@id/recommendationsFragment2" />
     </fragment>
     <fragment
         android:id="@+id/allActorsFragment"
@@ -37,4 +43,31 @@
         android:name="com.example.kfp_movies.ui.single_actor.SingleActorFragment"
         android:label="single_actor_fragment"
         tools:layout="@layout/single_actor_fragment" />
+    <fragment
+        android:id="@+id/similarFragment3"
+        android:name="com.example.kfp_movies.ui.all_similar_movies.SimilarFragment"
+        android:label="similar_fragment"
+        tools:layout="@layout/similar_fragment" >
+        <action
+            android:id="@+id/action_similarFragment3_to_singleSimilarMovieFragment"
+            app:destination="@id/singleSimilarMovieFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/singleSimilarMovieFragment"
+        android:name="com.example.kfp_movies.ui.single_similar_movie.SingleSimilarMovieFragment"
+        android:label="SingleSimilarMovieFragment" />
+    <fragment
+        android:id="@+id/recommendationsFragment2"
+        android:name="com.example.kfp_movies.ui.all_recommendation_movies.RecommendationsFragment"
+        android:label="recommendations_fragment"
+        tools:layout="@layout/recommendations_fragment" >
+        <action
+            android:id="@+id/action_recommendationsFragment2_to_singleRecommendedMovieFragment"
+            app:destination="@id/singleRecommendedMovieFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/singleRecommendedMovieFragment"
+        android:name="com.example.kfp_movies.ui.single_recommended_movie.SingleRecommendedMovieFragment"
+        android:label="single_recommended_movie"
+        tools:layout="@layout/single_recommended_movie" />
 </navigation>

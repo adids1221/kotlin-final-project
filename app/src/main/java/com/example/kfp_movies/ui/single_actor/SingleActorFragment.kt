@@ -6,17 +6,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.example.kfp_movies.R
 import com.example.kfp_movies.data.models.Actor
-import com.example.kfp_movies.data.models.Movie
 import com.example.kfp_movies.databinding.SingleActorFragmentBinding
-import com.example.kfp_movies.ui.single_movie.SingleMovieViewModel
 import com.example.kfp_movies.utils.*
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -55,8 +51,6 @@ class SingleActorFragment : Fragment() {
                     binding.progressBar.isVisible = false
                     Toast.makeText(requireContext(), it.status.message, Toast.LENGTH_SHORT).show()
                 }
-
-                else -> {}
             }
         }
 
@@ -78,7 +72,9 @@ class SingleActorFragment : Fragment() {
         binding.actorRatingBar.rating = actor.popularity?.let { getRating(it) }!!
         binding.placeOfBirth.text = actor.place_of_birth
         Glide.with(binding.root)
-            .load("https://image.tmdb.org/t/p/w500${actor.profile_path}").centerCrop()
+            .load("https://image.tmdb.org/t/p/w500${actor.profile_path}")
+            .placeholder(R.drawable.glide_placeholder)
+            .centerCrop()
             .into(binding.actorProfile)
         /* binding.gender.text = character.gender
          binding.species.text = character.species

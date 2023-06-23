@@ -3,6 +3,7 @@ package com.example.kfp_movies.data.repository
 import com.example.kfp_movies.data.local_db.*
 import androidx.lifecycle.LiveData
 import com.example.kfp_movies.data.models.FavoriteMovie
+import com.example.kfp_movies.data.models.Review
 import com.example.kfp_movies.data.remote_db.MovieRemoteDataSource
 import com.example.kfp_movies.utils.performFetchingAndSaving
 import javax.inject.Inject
@@ -93,8 +94,13 @@ class MovieRepository @Inject constructor(
     }
 
     fun getReviews(id: Int) = performFetchingAndSaving(
-        { reviewLocalDataSource.getReviews(id) },
+        { reviewLocalDataSource.getAllReviews() },
         { remoteDataSource.getReviews(id) },
-        { reviewLocalDataSource.insertReviews(it.results) }
+        {reviewLocalDataSource.clearReviewsTable()
+            reviewLocalDataSource.insertReviews(it.results) }
     )
+
+     fun getReview(id:String): LiveData<Review> {
+        return reviewLocalDataSource.getReview(id)
+    }
 }

@@ -18,7 +18,6 @@ import dagger.hilt.android.AndroidEntryPoint
 import com.example.kfp_movies.databinding.SingleMovieFragmentBinding
 
 import com.example.kfp_movies.data.models.Movie
-import com.example.kfp_movies.ui.all_movies.MoviesAdapter
 import com.example.kfp_movies.utils.*
 
 @AndroidEntryPoint
@@ -64,6 +63,24 @@ class SingleMovieFragment : Fragment(), SingleMovieReviewsAdapter.ReviewItemList
                 }
 
             }
+        }
+        viewModel.reviews.observe(viewLifecycleOwner){
+            when (it.status) {
+                is Loading -> binding.progressBar.isVisible = true
+                is Success -> {
+                    if (!it.status.data.isNullOrEmpty()) {
+                        binding.progressBar.isVisible = false
+                        adapter.setReviews(ArrayList(it.status.data))
+
+                    }
+                }
+                is Error -> {
+                    binding.progressBar.isVisible = false
+                    Toast.makeText(requireContext(), "Failed to load movie's reviews", Toast.LENGTH_SHORT).show()
+                }
+
+            }
+
         }
 
         arguments?.getInt("id")?.let {
@@ -124,9 +141,7 @@ class SingleMovieFragment : Fragment(), SingleMovieReviewsAdapter.ReviewItemList
             .into(binding.moviePoster)
     }
 
-    override fun onReviewClick(reviewId: String) {
-        TODO("Not yet implemented")
-    }
+
 
     private fun addMovieToFavorites(movie: FavoriteMovie) {
         viewModel.addToFavorites(movie)
@@ -136,5 +151,12 @@ class SingleMovieFragment : Fragment(), SingleMovieReviewsAdapter.ReviewItemList
     private fun deleteFavoriteMovie(movie: FavoriteMovie) {
         viewModel.removeFromFavorites(movie)
         Toast.makeText(requireContext(), "Removed from favorites", Toast.LENGTH_SHORT).show()
+    }
+
+    override fun onReviewClick(reviewId: String) {
+        findNavController().navigate(
+            R.id.action_singleMovieFragment_to_singleReviewFragment,
+            bundleOf("id" to reviewId)
+        )
     }
 }

@@ -6,7 +6,6 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.kfp_movies.R
-import com.example.kfp_movies.data.models.Movie
 import com.example.kfp_movies.data.models.Review
 import com.example.kfp_movies.databinding.ItemReviewBinding
 import com.example.kfp_movies.utils.getRating
@@ -46,7 +45,7 @@ class SingleMovieReviewsAdapter(private val listener: ReviewItemListener) :
         }
     }
 
-    fun setReviews(movies: Collection<Movie>) {
+    fun setReviews(reviews: Collection<Review>) {
         this.reviews.clear()
         this.reviews.addAll(reviews)
         notifyDataSetChanged()

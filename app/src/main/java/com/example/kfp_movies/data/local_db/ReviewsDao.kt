@@ -13,11 +13,11 @@ interface ReviewsDao {
     fun getAllReviews(): LiveData<List<Review>>
 
     @Query("SELECT * FROM reviews WHERE id = :id")
-    fun getReviews(id: Int): LiveData<Review>
+    fun getReview(id: String): LiveData<Review>
 
     @Query("DELETE FROM reviews")
     suspend fun clearReviewsTable()
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertReviews(review: List<Review>)
+    suspend fun insertReviews(reviews: List<Review>)
 }

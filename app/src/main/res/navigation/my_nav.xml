@@ -31,6 +31,9 @@
         <action
             android:id="@+id/action_singleMovieFragment_to_recommendationsFragment2"
             app:destination="@id/recommendationsFragment2" />
+        <action
+            android:id="@+id/action_singleMovieFragment_to_singleReviewFragment"
+            app:destination="@id/singleReviewFragment" />
     </fragment>
     <fragment
         android:id="@+id/allActorsFragment"
@@ -82,4 +85,9 @@
             android:id="@+id/action_allFavoriteMoviesFragment_to_singleMovieFragment"
             app:destination="@id/singleMovieFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/singleReviewFragment"
+        android:name="com.example.kfp_movies.ui.single_review.SingleReviewFragment"
+        android:label="single_review_fragment"
+        tools:layout="@layout/single_review_fragment" />
 </navigation>

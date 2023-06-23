@@ -8,7 +8,7 @@ import com.example.kfp_movies.data.models.*
 
 @Database(
     entities = [Movie::class, Actor::class, SimilarMovie::class, RecommendedMovie::class, FavoriteMovie::class, Review::class],
-    version = 5,
+    version = 7,
     exportSchema = false
 )
 abstract class AppDatabase : RoomDatabase() {

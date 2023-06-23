@@ -20,9 +20,9 @@ class MovieRepository @Inject constructor(
     private val reviewLocalDataSource: ReviewsDao
 ) {
 
-    fun getTrending() = performFetchingAndSaving(
+    fun getTrending(page: Int) = performFetchingAndSaving(
         { localDataSource.getAll() },
-        { remoteDataSource.getTrending() },
+        { remoteDataSource.getTrending(page) },
         { localDataSource.insertMovies(it.results) }
     )
 

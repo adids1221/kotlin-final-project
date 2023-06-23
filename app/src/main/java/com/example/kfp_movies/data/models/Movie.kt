@@ -22,7 +22,7 @@ data class Movie(
     val creditId: String? = null,
     val order: Int,
     var type: Int = 0,
-
+    val timestamp: Long = System.currentTimeMillis() // Add timestamp field with current timestamp
     ) {
 
 }

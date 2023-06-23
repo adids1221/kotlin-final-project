@@ -17,6 +17,7 @@ import com.example.kfp_movies.databinding.RecommendationsFragmentBinding
 import com.example.kfp_movies.utils.Loading
 import com.example.kfp_movies.utils.Success
 import com.example.kfp_movies.utils.autoCleared
+import com.example.kfp_movies.utils.setToolbarTitle
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -38,6 +39,10 @@ class RecommendationsFragment : Fragment(), RecommendationsAdapter.RecommendedIt
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        val activity = requireActivity()
+        val title = getString(R.string.recommendations_fragment_title)
+        setToolbarTitle(activity, title)
 
         adapter = RecommendationsAdapter(this)
         binding.recommendationsRv.layoutManager = LinearLayoutManager(requireContext())

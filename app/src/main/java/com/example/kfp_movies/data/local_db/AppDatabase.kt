@@ -7,7 +7,7 @@ import androidx.room.RoomDatabase
 import com.example.kfp_movies.data.models.*
 
 @Database(
-    entities = [Movie::class, Actor::class, SimilarMovie::class, RecommendedMovie::class, Review::class],
+    entities = [Movie::class, Actor::class, SimilarMovie::class, RecommendedMovie::class, FavoriteMovie::class, Review::class],
     version = 4,
     exportSchema = false
 )
@@ -18,6 +18,7 @@ abstract class AppDatabase : RoomDatabase() {
     abstract fun similarDao(): SimilarDao
 
     abstract fun recommendedDao(): RecommendedDao
+    abstract fun favoriteDao(): FavoriteDao
 
     abstract fun reviewsDao(): ReviewsDao
 

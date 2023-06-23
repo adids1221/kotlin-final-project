@@ -10,31 +10,41 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+
         <androidx.appcompat.widget.SearchView
             android:id="@+id/search"
-            android:layout_width="0dp"
+            android:layout_width="387dp"
             android:layout_height="wrap_content"
-            android:layout_margin="12dp"
             android:layout_marginTop="16dp"
             android:background="@drawable/search_bg"
             android:focusable="false"
             app:closeIcon="@drawable/baseline_clear_24"
             app:iconifiedByDefault="false"
-            app:layout_constraintBottom_toTopOf="@+id/movies_rv"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.333"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:queryHint="Search..."
             app:searchHintIcon="@null"
             app:searchIcon="@drawable/baseline_search_24" />
 
+        <Button
+            android:id="@+id/show_fav_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:text="@string/show_fav_btn"
+            android:textSize="11sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/search" />
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/movies_rv"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            app:layout_constraintTop_toBottomOf="@+id/search" />
-
+            android:layout_marginTop="12dp"
+            app:layout_constraintTop_toBottomOf="@+id/show_fav_btn"
+            tools:layout_editor_absoluteX="0dp" />
 
         <ProgressBar
             android:id="@+id/progress_bar"

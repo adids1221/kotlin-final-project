@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_allMoviesFragment_to_singleMovieFragment"
             app:destination="@id/singleMovieFragment" />
+        <action
+            android:id="@+id/action_allMoviesFragment_to_allFavoriteMoviesFragment"
+            app:destination="@id/allFavoriteMoviesFragment" />
     </fragment>
     <fragment
         android:id="@+id/singleMovieFragment"
@@ -70,4 +73,13 @@
         android:name="com.example.kfp_movies.ui.single_recommended_movie.SingleRecommendedMovieFragment"
         android:label="single_recommended_movie"
         tools:layout="@layout/single_recommended_movie" />
+    <fragment
+        android:id="@+id/allFavoriteMoviesFragment"
+        android:name="com.example.kfp_movies.ui.all_favorite_movies.AllFavoriteMoviesFragment"
+        android:label="favorite_fragment"
+        tools:layout="@layout/favorite_fragment" >
+        <action
+            android:id="@+id/action_allFavoriteMoviesFragment_to_singleMovieFragment"
+            app:destination="@id/singleMovieFragment" />
+    </fragment>
 </navigation>

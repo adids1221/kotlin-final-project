@@ -56,5 +56,9 @@ class AppModule {
 
     @Provides
     @Singleton
+    fun provideFavoriteDao(database: AppDatabase) = database.favoriteDao()
+
+    @Provides
+    @Singleton
     fun provideReviewsDao(database: AppDatabase) = database.reviewsDao()
 }

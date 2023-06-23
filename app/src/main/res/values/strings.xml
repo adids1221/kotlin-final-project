@@ -21,7 +21,6 @@
     <string name="actor_role_placeholder">Actor role</string>
     <string name="show_actor_btn">Show Actors</string>
     <string name="show_fav_btn">Show Favorite Movies</string>
-    <string name="movie_credits_btn">Show Actor Movies</string>
     <string name="reviews_section_title">Movie Reviews</string>
     <string name="show_recommendations_btn">Show Recommendations</string>
     <string name="show_similar_btn">Show Similar</string>

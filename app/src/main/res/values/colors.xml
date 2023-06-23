@@ -11,8 +11,10 @@
     <color name="white">#FFFFFF</color>
     <color name="yellow_text">#FFEB3B</color>
     <color name="gold_rating_bar">#FFD700</color>
+    <color name="favorite_btn_color">#EDD44A</color>
     <color name="fab_color">#1D1D1D</color>
     <color name="red_validation">#D61919</color>
     <color name="disable_validation">#AAB1BD</color>
     <color name="soft_off_white">#e9e0c9</color>
+    <color name="favRed">#E65454</color>
 </resources>

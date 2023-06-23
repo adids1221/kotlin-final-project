@@ -23,7 +23,7 @@
                                 <PersistentState>
                                   <option name="values">
                                     <map>
-                                      <entry key="url" value="file:$USER_HOME$/Library/Android/sdk/icons/material/materialicons/local_movies/baseline_local_movies_24.xml" />
+                                      <entry key="url" value="file:$USER_HOME$/Library/Android/sdk/icons/material/materialicons/star/baseline_star_24.xml" />
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -33,8 +33,8 @@
                         </option>
                         <option name="values">
                           <map>
-                            <entry key="color" value="e9e0c9" />
-                            <entry key="outputName" value="baseline_local_movies_24" />
+                            <entry key="color" value="1c1a1a" />
+                            <entry key="outputName" value="baseline_star_24" />
                             <entry key="sourceFile" value="/C:\Users\asafa\AndroidStudioProjects\kotlin-final-project" />
                           </map>
                         </option>

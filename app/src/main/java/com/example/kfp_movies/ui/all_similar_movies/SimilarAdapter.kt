@@ -3,13 +3,13 @@ package com.example.kfp_movies.ui.all_similar_movies
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.kfp_movies.R
 import com.example.kfp_movies.data.models.SimilarMovie
 import com.example.kfp_movies.databinding.ItemMovieBinding
 import com.example.kfp_movies.utils.getRating
+import com.example.kfp_movies.utils.reformatDate
 
 class SimilarAdapter(private val listener: SimilarItemListener) :
     RecyclerView.Adapter<SimilarAdapter.SimilarViewHolder>() {
@@ -33,12 +33,11 @@ class SimilarAdapter(private val listener: SimilarItemListener) :
             itemBinding.movieTitle.text = item.title
             itemBinding.movieDescription.text = "${item.overview} "
             itemBinding.itemRatingBar.rating = item.vote_average?.let { getRating(it) }!!
-            itemBinding.movieReleaseDate.text = item.release_date
+            itemBinding.movieReleaseDate.text = item.release_date?.let { reformatDate(it) }
             Glide.with(itemBinding.root)
                 .load("https://image.tmdb.org/t/p/w500${item.poster_path}")
                 .placeholder(R.drawable.glide_placeholder).centerCrop()
                 .into(itemBinding.moviePoster)
-            itemBinding.favStar.isVisible = false
         }
 
         override fun onClick(v: View?) {

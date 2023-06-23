@@ -37,6 +37,8 @@ class SingleActorFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val activity = requireActivity()
+        lateinit var title: String
 
         viewModel.actor.observe(viewLifecycleOwner) {
             when (it.status) {
@@ -44,6 +46,8 @@ class SingleActorFragment : Fragment() {
                 is Success -> {
                     if (it.status.data != null) {
                         binding.progressBar.isVisible = false
+                        title = it.status.data.name.toString()
+                        setToolbarTitle(activity, title)
                         updateActor(it.status.data!!)
                     }
                 }
@@ -68,7 +72,7 @@ class SingleActorFragment : Fragment() {
 
         binding.actorName.text = actor.name
         binding.actorBiography.text = actor.biography
-        binding.actorBirthday.text = actor.birthday
+        binding.actorBirthday.text = actor.birthday?.let { reformatDate(it) }
         binding.actorRatingBar.rating = actor.popularity?.let { getRating(it) }!!
         binding.placeOfBirth.text = actor.place_of_birth
         Glide.with(binding.root)
@@ -76,11 +80,5 @@ class SingleActorFragment : Fragment() {
             .placeholder(R.drawable.glide_placeholder)
             .centerCrop()
             .into(binding.actorProfile)
-        /* binding.gender.text = character.gender
-         binding.species.text = character.species
-         binding.status.text = character.status
-         */
-
-
     }
 }

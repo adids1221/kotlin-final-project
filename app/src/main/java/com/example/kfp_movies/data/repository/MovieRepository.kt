@@ -1,9 +1,8 @@
 package com.example.kfp_movies.data.repository
 
-import com.example.kfp_movies.data.local_db.ActorDao
-import com.example.kfp_movies.data.local_db.MovieDao
-import com.example.kfp_movies.data.local_db.RecommendedDao
-import com.example.kfp_movies.data.local_db.SimilarDao
+import androidx.lifecycle.LiveData
+import com.example.kfp_movies.data.local_db.*
+import com.example.kfp_movies.data.models.FavoriteMovie
 import com.example.kfp_movies.data.remote_db.MovieRemoteDataSource
 import com.example.kfp_movies.utils.performFetchingAndSaving
 import javax.inject.Inject
@@ -15,7 +14,8 @@ class MovieRepository @Inject constructor(
     private val localDataSource: MovieDao,
     private val actorsLocalDataSource: ActorDao,
     private val similarLocalDataSource: SimilarDao,
-    private val recommendedLocalDataSource: RecommendedDao
+    private val recommendedLocalDataSource: RecommendedDao,
+    private val favoriteLocalDataSource: FavoriteDao
 
 ) {
 
@@ -75,4 +75,20 @@ class MovieRepository @Inject constructor(
         { remoteDataSource.getRecommended(id) },
         { recommendedLocalDataSource.insertRecommendedMovie(it) }
     )
+
+    suspend fun insertFavoriteMovie(movie: FavoriteMovie){
+        favoriteLocalDataSource.insertFavoriteMovie(movie)
+    }
+
+    suspend fun deleteFavoriteMovie(movie:FavoriteMovie){
+        favoriteLocalDataSource.deleteFavoriteMovie(movie)
+    }
+
+    fun getAllFavoriteMovies(): LiveData<List<FavoriteMovie>> {
+        return favoriteLocalDataSource.getAllFavoriteMovies()
+    }
+
+   suspend fun isFavoriteMovie(id:Int?):Boolean{
+       return favoriteLocalDataSource.isFavoriteMovie(id)
+    }
 }

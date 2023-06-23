@@ -1,15 +1,16 @@
 package com.example.kfp_movies.ui.all_recommendation_movies
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.kfp_movies.R
 import com.example.kfp_movies.data.models.RecommendedMovie
 import com.example.kfp_movies.databinding.ItemMovieBinding
 import com.example.kfp_movies.utils.getRating
+import com.example.kfp_movies.utils.reformatDate
 
 class RecommendationsAdapter(private val listener: RecommendedItemListener) :
     RecyclerView.Adapter<RecommendationsAdapter.RecommendedViewHolder>() {
@@ -28,18 +29,18 @@ class RecommendationsAdapter(private val listener: RecommendedItemListener) :
             itemBinding.root.setOnClickListener(this)
         }
 
+        @SuppressLint("SuspiciousIndentation")
         fun bind(item: RecommendedMovie) {
             this.movie = item
             itemBinding.movieTitle.text = item.title
             itemBinding.movieDescription.text = "${item.overview} "
             itemBinding.itemRatingBar.rating = item.vote_average?.let { getRating(it) }!!
-            itemBinding.movieReleaseDate.text = item.release_date
+            itemBinding.movieReleaseDate.text = item.release_date?.let { reformatDate(it) }
               Glide.with(itemBinding.root)
                 .load("https://image.tmdb.org/t/p/w500${movie.poster_path}")
                 .placeholder(R.drawable.glide_placeholder)
                 .centerCrop()
                 .into(itemBinding.moviePoster)
-            itemBinding.favStar.isVisible = false
         }
 
         override fun onClick(v: View?) {

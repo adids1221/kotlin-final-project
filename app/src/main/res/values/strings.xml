@@ -1,5 +1,8 @@
 <resources>
     <string name="app_name">A&amp;A Movies</string>
+    <string name="favorite_movies_fragment_title">Favorite Movies</string>
+    <string name="recommendations_fragment_title">Recommended Movies</string>
+    <string name="similar_fragment_title">Similar Movies</string>
     <string name="all_items_layout_title">Movie Catalog</string>
     <string name="add_item_page_title">Add Movie</string>
     <string name="edit_item_page_title">Edit Movie</string>
@@ -14,6 +17,7 @@
     <string name="actor_title_placeholder">Actor name</string>
     <string name="actor_role_placeholder">Actor role</string>
     <string name="show_actor_btn">Show Actors</string>
+    <string name="show_fav_btn">Show Favorite Movies</string>
     <string name="movie_credits_btn">Show Actor Movies</string>
     <string name="show_recommendations_btn">Show Recommendations</string>
     <string name="show_similar_btn">Show Similar</string>

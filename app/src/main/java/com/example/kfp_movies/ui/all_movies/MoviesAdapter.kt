@@ -1,6 +1,5 @@
 package com.example.kfp_movies.ui.all_movies
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,6 +11,7 @@ import com.example.kfp_movies.R
 import com.example.kfp_movies.data.models.Movie
 import com.example.kfp_movies.databinding.ItemMovieBinding
 import com.example.kfp_movies.utils.getRating
+import com.example.kfp_movies.utils.reformatDate
 
 class MoviesAdapter(private val listener: MovieItemListener) :
     RecyclerView.Adapter<MoviesAdapter.MovieViewHolder>(), Filterable {
@@ -41,15 +41,12 @@ class MoviesAdapter(private val listener: MovieItemListener) :
             itemBinding.movieTitle.text = item.title
             itemBinding.movieDescription.text = "${item.overview} "
             itemBinding.itemRatingBar.rating = item.vote_average?.let { getRating(it) }!!
-            itemBinding.movieReleaseDate.text = item.release_date
+            itemBinding.movieReleaseDate.text = item.release_date?.let { reformatDate(it) }
             Glide.with(itemBinding.root)
                 .load("https://image.tmdb.org/t/p/w500${item.poster_path}")
                 .placeholder(R.drawable.glide_placeholder)
                 .centerCrop()
                 .into(itemBinding.moviePoster)
-            itemBinding.favStar.setOnCheckedChangeListener { _, isChecked ->
-                Log.d(item.title, "This movie ${item.title} has been marked!")
-            }
         }
 
         override fun onClick(v: View?) {

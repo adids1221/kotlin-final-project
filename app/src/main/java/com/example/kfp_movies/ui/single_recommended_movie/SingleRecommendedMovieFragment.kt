@@ -36,12 +36,17 @@ class SingleRecommendedMovieFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val activity = requireActivity()
+        lateinit var title: String
+
         viewModel.movie.observe(viewLifecycleOwner) {
             when (it.status) {
                 is Loading -> binding.progressBar.isVisible = true
                 is Success -> {
                     if (it.status.data != null) {
                         binding.progressBar.isVisible = false
+                        title = it.status.data.title.toString()
+                        setToolbarTitle(activity, title)
                         updateRecommendedMovie(it.status.data!!)
                     }
                 }
@@ -61,7 +66,7 @@ class SingleRecommendedMovieFragment : Fragment() {
     private fun updateRecommendedMovie(movie: RecommendedMovie) {
         binding.movieTitle.text = movie.title
         binding.movieDescription.text = movie.overview
-        binding.movieReleaseDate.text = movie.release_date
+        binding.movieReleaseDate.text = movie.release_date?.let { reformatDate(it) }
         binding.itemRatingBar.rating = movie.vote_average?.let { getRating(it) }!!
         Glide.with(binding.root)
             .load("https://image.tmdb.org/t/p/w500${movie.poster_path}")

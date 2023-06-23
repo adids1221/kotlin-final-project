@@ -74,9 +74,9 @@ class MovieRepository @Inject constructor(
         { recommendedLocalDataSource.insertRecommendedMovie(it) }
     )
 
-//    fun getReviews(id: Int) = performFetchingAndSaving(
-//        { reviewLocalDataSource.getReviews(id) },
-//        { remoteDataSource.getReviews(id) },
-//        { reviewLocalDataSource.insertReview(it.) }
-//    )
+    fun getReviews(id: Int) = performFetchingAndSaving(
+        { reviewLocalDataSource.getReviews(id) },
+        { remoteDataSource.getReviews(id) },
+        { reviewLocalDataSource.insertReviews(it.results) }
+    )
 }

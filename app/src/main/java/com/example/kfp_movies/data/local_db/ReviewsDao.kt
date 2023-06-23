@@ -6,7 +6,6 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.example.kfp_movies.data.models.Review
-import com.example.kfp_movies.data.models.ReviewsResponse
 
 @Dao
 interface ReviewsDao {
@@ -20,5 +19,5 @@ interface ReviewsDao {
     suspend fun clearReviewsTable()
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertReview(review: Review)
+    suspend fun insertReviews(review: List<Review>)
 }

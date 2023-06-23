@@ -10,22 +10,25 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.example.kfp_movies.R
 import dagger.hilt.android.AndroidEntryPoint
 import com.example.kfp_movies.databinding.SingleMovieFragmentBinding
 
 import com.example.kfp_movies.data.models.Movie
+import com.example.kfp_movies.ui.all_movies.MoviesAdapter
 import com.example.kfp_movies.utils.*
 
 @AndroidEntryPoint
-class SingleMovieFragment : Fragment() {
+class SingleMovieFragment : Fragment(), SingleMovieReviewsAdapter.ReviewItemListener {
 
 
     private var binding: SingleMovieFragmentBinding by autoCleared()
 
     private val viewModel: SingleMovieViewModel by viewModels()
 
+    private lateinit var adapter: SingleMovieReviewsAdapter
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -38,7 +41,9 @@ class SingleMovieFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        adapter = SingleMovieReviewsAdapter(this)
+        binding.reviewsRv.layoutManager = LinearLayoutManager(requireContext())
+        binding.reviewsRv.adapter = adapter
 
         viewModel.movie.observe(viewLifecycleOwner) {
             when (it.status) {
@@ -93,5 +98,9 @@ class SingleMovieFragment : Fragment() {
             .placeholder(R.drawable.glide_placeholder)
             .centerCrop()
             .into(binding.moviePoster)
+    }
+
+    override fun onReviewClick(reviewId: String) {
+        TODO("Not yet implemented")
     }
 }

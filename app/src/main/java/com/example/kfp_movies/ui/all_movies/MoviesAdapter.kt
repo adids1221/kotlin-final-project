@@ -99,7 +99,6 @@ class MoviesAdapter(private val listener: MovieItemListener) :
                 moviesFilterList = results?.values as ArrayList<Movie>
                 notifyDataSetChanged()
             }
-
         }
     }
 

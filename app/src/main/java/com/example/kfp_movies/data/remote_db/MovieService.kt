@@ -67,10 +67,10 @@ interface MovieService {
         @Query("api_key") api_key: String
     ): Response<Actor>
 
-    @GET("search/movie")
-    suspend fun searchMovies(
-        @Query("query") query: String,
+    @GET("movie/{movie_id}/reviews")
+    suspend fun getReviews(
+        @Path("movie_id") movieId: Int,
         @Query("api_key") api_key: String
-    ): Response<SearchResultResponse>
+    ): Response<ReviewsResponse>
 
 }

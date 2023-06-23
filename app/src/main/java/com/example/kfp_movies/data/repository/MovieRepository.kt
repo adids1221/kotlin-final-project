@@ -1,9 +1,6 @@
 package com.example.kfp_movies.data.repository
 
-import com.example.kfp_movies.data.local_db.ActorDao
-import com.example.kfp_movies.data.local_db.MovieDao
-import com.example.kfp_movies.data.local_db.RecommendedDao
-import com.example.kfp_movies.data.local_db.SimilarDao
+import com.example.kfp_movies.data.local_db.*
 import com.example.kfp_movies.data.remote_db.MovieRemoteDataSource
 import com.example.kfp_movies.utils.performFetchingAndSaving
 import javax.inject.Inject
@@ -15,7 +12,8 @@ class MovieRepository @Inject constructor(
     private val localDataSource: MovieDao,
     private val actorsLocalDataSource: ActorDao,
     private val similarLocalDataSource: SimilarDao,
-    private val recommendedLocalDataSource: RecommendedDao
+    private val recommendedLocalDataSource: RecommendedDao,
+    private val reviewLocalDataSource: ReviewsDao
 
 ) {
 
@@ -75,4 +73,10 @@ class MovieRepository @Inject constructor(
         { remoteDataSource.getRecommended(id) },
         { recommendedLocalDataSource.insertRecommendedMovie(it) }
     )
+
+//    fun getReviews(id: Int) = performFetchingAndSaving(
+//        { reviewLocalDataSource.getReviews(id) },
+//        { remoteDataSource.getReviews(id) },
+//        { reviewLocalDataSource.insertReview(it.) }
+//    )
 }

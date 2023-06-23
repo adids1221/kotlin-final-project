@@ -7,6 +7,8 @@
     <string name="fab_content_desc">Add New Movie</string>
     <string name="poster_desc">movie poster image</string>
     <string name="movie_title_placeholder">Movie Title</string>
+    <string name="review_author_placeholder">Review Author</string>
+    <string name="review_content_placeholder">Review Content</string>
     <string name="movie_players_placeholder">Players</string>
     <string name="movie_release_date_placeholder">Movie Release Date</string>
     <string name="movie_rating_placeholder">Movie Rating</string>
@@ -15,6 +17,7 @@
     <string name="actor_role_placeholder">Actor role</string>
     <string name="show_actor_btn">Show Actors</string>
     <string name="movie_credits_btn">Show Actor Movies</string>
+    <string name="reviews_section_title">Movie Reviews</string>
     <string name="show_recommendations_btn">Show Recommendations</string>
     <string name="show_similar_btn">Show Similar</string>
     <string name="save_movie_btn">Submit</string>

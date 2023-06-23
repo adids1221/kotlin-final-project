@@ -68,7 +68,7 @@ class SingleActorFragment : Fragment() {
 
         binding.actorName.text = actor.name
         binding.actorBiography.text = actor.biography
-        binding.actorBirthday.text = actor.birthday
+        binding.actorBirthday.text = actor.birthday?.let { reformatDate(it) }
         binding.actorRatingBar.rating = actor.popularity?.let { getRating(it) }!!
         binding.placeOfBirth.text = actor.place_of_birth
         Glide.with(binding.root)
@@ -76,11 +76,5 @@ class SingleActorFragment : Fragment() {
             .placeholder(R.drawable.glide_placeholder)
             .centerCrop()
             .into(binding.actorProfile)
-        /* binding.gender.text = character.gender
-         binding.species.text = character.species
-         binding.status.text = character.status
-         */
-
-
     }
 }

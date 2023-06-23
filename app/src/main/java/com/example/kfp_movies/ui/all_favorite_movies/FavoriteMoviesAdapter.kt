@@ -9,6 +9,7 @@ import com.example.kfp_movies.R
 import com.example.kfp_movies.data.models.FavoriteMovie
 import com.example.kfp_movies.databinding.ItemMovieBinding
 import com.example.kfp_movies.utils.getRating
+import com.example.kfp_movies.utils.reformatDate
 
 class FavoriteMoviesAdapter(private val listener: FavoriteItemListener) :
     RecyclerView.Adapter<FavoriteMoviesAdapter.FavoriteViewHolder>() {
@@ -32,7 +33,7 @@ class FavoriteMoviesAdapter(private val listener: FavoriteItemListener) :
             itemBinding.movieTitle.text = item.title
             itemBinding.movieDescription.text = "${item.overview} "
             itemBinding.itemRatingBar.rating = item.vote_average?.let { getRating(it) }!!
-            itemBinding.movieReleaseDate.text = item.release_date
+            itemBinding.movieReleaseDate.text = item.release_date?.let { reformatDate(it) }
             Glide.with(itemBinding.root)
                 .load("https://image.tmdb.org/t/p/w500${item.poster_path}")
                 .placeholder(R.drawable.glide_placeholder)

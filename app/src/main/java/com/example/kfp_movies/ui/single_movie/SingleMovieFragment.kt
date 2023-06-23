@@ -9,6 +9,7 @@ import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.example.kfp_movies.R
@@ -30,8 +31,6 @@ class SingleMovieFragment : Fragment() {
 
     private val viewModel: SingleMovieViewModel by viewModels()
 
-    @Inject
-    lateinit var movieDatabase: AppDatabase
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -84,10 +83,20 @@ class SingleMovieFragment : Fragment() {
             )
         }
 
+        viewModel.isFavoriteMovie(movieId).observe(viewLifecycleOwner) { isFavorite ->
+            binding.favStar.isChecked = isFavorite
+        }
+
+        /*lifecycleScope.launch {
+            val isFavorite = viewModel.isFavoriteMovie(movieId)
+            val isFavoriteBoolean
+            binding.favStar.isChecked = isFavorite
+        }*/
+
+
     }
 
     private fun updateMovie(movie: Movie) {
-        val favoriteDao = movieDatabase.favoriteDao()
         val favoriteMovie = FavoriteMovie(
             id = movie.id,
             title = movie.title,
@@ -97,11 +106,12 @@ class SingleMovieFragment : Fragment() {
             poster_path = movie.poster_path
         )
 
+
         binding.favStar.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked) {
-                addMovieToFavorites(favoriteMovie, favoriteDao)
+                addMovieToFavorites(favoriteMovie)
             } else {
-                deleteFavoriteMovie(favoriteMovie, favoriteDao)
+                deleteFavoriteMovie(favoriteMovie)
             }
         }
 
@@ -116,22 +126,34 @@ class SingleMovieFragment : Fragment() {
             .into(binding.moviePoster)
     }
 
+    private fun addMovieToFavorites(movie: FavoriteMovie) {
 
-    private fun addMovieToFavorites(movie: FavoriteMovie, favoriteDao: FavoriteDao) {
+        viewModel.addToFavorites(movie)
+        Toast.makeText(requireContext(), "Added to favorites", Toast.LENGTH_SHORT).show()
+    }
+
+    private fun deleteFavoriteMovie(movie: FavoriteMovie) {
+
+        viewModel.removeFromFavorites(movie)
+        Toast.makeText(requireContext(), "Removed from favorites", Toast.LENGTH_SHORT).show()
+    }
+
+
+    /*private fun addMovieToFavorites(movie: FavoriteMovie, favoriteDao: FavoriteDao) {
 
         GlobalScope.launch(Dispatchers.IO) {
             favoriteDao.insertFavoriteMovie(movie)
         }
         Toast.makeText(requireContext(), "Added to favorites", Toast.LENGTH_SHORT).show()
-    }
+    }*/
 
-    private fun deleteFavoriteMovie(movie: FavoriteMovie, favoriteDao: FavoriteDao) {
+    /*private fun deleteFavoriteMovie(movie: FavoriteMovie, favoriteDao: FavoriteDao) {
 
         GlobalScope.launch(Dispatchers.IO) {
             favoriteDao.deleteFavoriteMovie(movie)
         }
         Toast.makeText(requireContext(), "Removed from favorites", Toast.LENGTH_SHORT).show()
-    }
+    }*/
 
 
 }

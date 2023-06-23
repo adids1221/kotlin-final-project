@@ -10,8 +10,8 @@ import com.example.kfp_movies.data.models.FavoriteMovie
 import com.example.kfp_movies.databinding.ItemMovieBinding
 import com.example.kfp_movies.utils.getRating
 
-class AllFavoriteMoviesAdapter(private val listener: FavoriteItemListener) :
-    RecyclerView.Adapter<AllFavoriteMoviesAdapter.FavoriteViewHolder>() {
+class FavoriteMoviesAdapter(private val listener: FavoriteItemListener) :
+    RecyclerView.Adapter<FavoriteMoviesAdapter.FavoriteViewHolder>() {
 
     private val movies = ArrayList<FavoriteMovie>()
 
@@ -40,6 +40,7 @@ class AllFavoriteMoviesAdapter(private val listener: FavoriteItemListener) :
                 .into(itemBinding.moviePoster)
         }
 
+
         override fun onClick(v: View?) {
             movie.id?.let { listener.onMovieClick(it) }
         }
@@ -50,6 +51,7 @@ class AllFavoriteMoviesAdapter(private val listener: FavoriteItemListener) :
         this.movies.addAll(movies)
         notifyDataSetChanged()
     }
+    fun favoriteAt(position: Int) = movies[position]
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FavoriteViewHolder {
         val binding =

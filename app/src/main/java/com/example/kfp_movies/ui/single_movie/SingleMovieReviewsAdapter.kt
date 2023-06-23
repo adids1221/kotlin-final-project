@@ -33,8 +33,16 @@ class SingleMovieReviewsAdapter(private val listener: ReviewItemListener) :
             itemBinding.authorName.text = item.author
             itemBinding.reviewContent.text = item.content
             itemBinding.itemRatingBar.rating = item.author_details?.rating?.let { getRating(it) }!!
+            val isGravatar: Boolean =
+                item.author_details.avatar_path?.contains("gravatar.com") ?: false
+            val imgUrl =
+                if (isGravatar) {
+                    item.author_details.avatar_path
+                } else {
+                    "https://image.tmdb.org/t/p/w200${item.author_details.avatar_path}"
+                }
             Glide.with(itemBinding.root)
-                .load("https://image.tmdb.org/t/p/w200${item.author_details.avatar_path}")
+                .load(imgUrl)
                 .placeholder(R.drawable.glide_placeholder)
                 .centerCrop()
                 .into(itemBinding.authorAvatar)

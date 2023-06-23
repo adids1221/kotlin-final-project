@@ -132,7 +132,7 @@ class SingleMovieFragment : Fragment(), SingleMovieReviewsAdapter.ReviewItemList
 
         binding.movieTitle.text = movie.title
         binding.movieDescription.text = movie.overview
-        binding.movieReleaseDate.text = movie.release_date
+        binding.movieReleaseDate.text = movie.release_date?.let { reformatDate(it) }
         binding.itemRatingBar.rating = movie.vote_average?.let { getRating(it) }!!
         Glide.with(binding.root)
             .load("https://image.tmdb.org/t/p/w500${movie.poster_path}")

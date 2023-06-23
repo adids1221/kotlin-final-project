@@ -17,9 +17,7 @@ data class Review(
     val author: String?,
     @Embedded
     val author_details: AuthorDetails?,
-
     ) {
-
 }
 
 

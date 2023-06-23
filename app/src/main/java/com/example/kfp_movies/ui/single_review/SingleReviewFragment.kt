@@ -1,19 +1,14 @@
 package com.example.kfp_movies.ui.single_review
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
-import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.bumptech.glide.Glide
 import com.example.kfp_movies.R
-import com.example.kfp_movies.data.models.Actor
 import com.example.kfp_movies.data.models.Review
-import com.example.kfp_movies.databinding.SingleActorFragmentBinding
 import com.example.kfp_movies.databinding.SingleReviewFragmentBinding
 import com.example.kfp_movies.utils.*
 import dagger.hilt.android.AndroidEntryPoint
@@ -40,12 +35,10 @@ class SingleReviewFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val activity = requireActivity()
-        lateinit var title: String
+        val title = getString(R.string.review_fragment_title)
+        setToolbarTitle(activity, title)
 
-        viewModel.review.observe(viewLifecycleOwner) {
-            updateReview(it)
-
-        }
+        viewModel.review.observe(viewLifecycleOwner) { updateReview(it) }
 
         arguments?.getString("id")?.let {
 

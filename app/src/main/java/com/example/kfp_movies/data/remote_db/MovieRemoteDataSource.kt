@@ -11,11 +11,11 @@ class MovieRemoteDataSource @Inject constructor(
     suspend fun getMovie(id: Int) =
         getResult { movieService.getMovie(id, "8e5ba8495daddc6d2438bfc535daa646") }
 
-    suspend fun getCasts(id:Int) =
-        getResult { movieService.getCasts(id,"8e5ba8495daddc6d2438bfc535daa646") }
+    suspend fun getCasts(id: Int) =
+        getResult { movieService.getCasts(id, "8e5ba8495daddc6d2438bfc535daa646") }
 
     suspend fun getActorDetails(id: Int) =
-        getResult { movieService.getActorDetails(id,"8e5ba8495daddc6d2438bfc535daa646") }
+        getResult { movieService.getActorDetails(id, "8e5ba8495daddc6d2438bfc535daa646") }
 
     suspend fun getSimilar(id: Int) =
         getResult { movieService.getSimilar(id, "8e5ba8495daddc6d2438bfc535daa646") }
@@ -28,4 +28,7 @@ class MovieRemoteDataSource @Inject constructor(
 
     suspend fun getRecommended(id: Int) =
         getResult { movieService.getRecommended(id, "8e5ba8495daddc6d2438bfc535daa646") }
+
+    suspend fun getReviews(id: Int) =
+        getResult { movieService.getReviews(id, "8e5ba8495daddc6d2438bfc535daa646") }
 }

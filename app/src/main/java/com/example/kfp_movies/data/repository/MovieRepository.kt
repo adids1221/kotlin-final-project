@@ -1,8 +1,9 @@
 package com.example.kfp_movies.data.repository
 
-import androidx.lifecycle.LiveData
 import com.example.kfp_movies.data.local_db.*
+import androidx.lifecycle.LiveData
 import com.example.kfp_movies.data.models.FavoriteMovie
+import com.example.kfp_movies.data.models.Review
 import com.example.kfp_movies.data.remote_db.MovieRemoteDataSource
 import com.example.kfp_movies.utils.performFetchingAndSaving
 import javax.inject.Inject
@@ -15,8 +16,8 @@ class MovieRepository @Inject constructor(
     private val actorsLocalDataSource: ActorDao,
     private val similarLocalDataSource: SimilarDao,
     private val recommendedLocalDataSource: RecommendedDao,
-    private val favoriteLocalDataSource: FavoriteDao
-
+    private val favoriteLocalDataSource: FavoriteDao,
+    private val reviewLocalDataSource: ReviewsDao
 ) {
 
     fun getTrending() = performFetchingAndSaving(
@@ -90,5 +91,16 @@ class MovieRepository @Inject constructor(
 
    suspend fun isFavoriteMovie(id:Int?):Boolean{
        return favoriteLocalDataSource.isFavoriteMovie(id)
+    }
+
+    fun getReviews(id: Int) = performFetchingAndSaving(
+        { reviewLocalDataSource.getAllReviews() },
+        { remoteDataSource.getReviews(id) },
+        {reviewLocalDataSource.clearReviewsTable()
+            reviewLocalDataSource.insertReviews(it.results) }
+    )
+
+     fun getReview(id:String): LiveData<Review> {
+        return reviewLocalDataSource.getReview(id)
     }
 }

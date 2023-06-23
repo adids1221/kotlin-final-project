@@ -17,9 +17,16 @@ class SingleMovieViewModel @Inject constructor(
     private val _id = MutableLiveData<Int>()
     val movie = _id.switchMap { movieRepository.getMovie(it) }
 
+    //private val _reviewsId = MutableLiveData<Int>()
+    val reviews = _id.switchMap { movieRepository.getReviews(it) }
+
     fun setId(id: Int) {
         _id.value = id
     }
+
+   /* fun setReviewsId(reviewsId:Int){
+        _reviewsId.value = reviewsId
+    }*/
 
     fun addToFavorites(favoriteMovie: FavoriteMovie) {
         viewModelScope.launch {
@@ -43,8 +50,4 @@ class SingleMovieViewModel @Inject constructor(
         }
         return resultLiveData
     }
-
-
-
-
 }

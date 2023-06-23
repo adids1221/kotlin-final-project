@@ -10,21 +10,24 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.example.kfp_movies.R
 import com.example.kfp_movies.data.models.FavoriteMovie
 import dagger.hilt.android.AndroidEntryPoint
 import com.example.kfp_movies.databinding.SingleMovieFragmentBinding
+
 import com.example.kfp_movies.data.models.Movie
 import com.example.kfp_movies.utils.*
 
 @AndroidEntryPoint
-class SingleMovieFragment : Fragment() {
+class SingleMovieFragment : Fragment(), SingleMovieReviewsAdapter.ReviewItemListener {
     private var binding: SingleMovieFragmentBinding by autoCleared()
 
     private val viewModel: SingleMovieViewModel by viewModels()
 
 
+    private lateinit var adapter: SingleMovieReviewsAdapter
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -39,6 +42,9 @@ class SingleMovieFragment : Fragment() {
 
         val activity = requireActivity()
         lateinit var title: String
+        adapter = SingleMovieReviewsAdapter(this)
+        binding.reviewsRv.layoutManager = LinearLayoutManager(requireContext())
+        binding.reviewsRv.adapter = adapter
 
         viewModel.movie.observe(viewLifecycleOwner) {
             when (it.status) {
@@ -57,6 +63,24 @@ class SingleMovieFragment : Fragment() {
                 }
 
             }
+        }
+        viewModel.reviews.observe(viewLifecycleOwner){
+            when (it.status) {
+                is Loading -> binding.progressBar.isVisible = true
+                is Success -> {
+                    if (!it.status.data.isNullOrEmpty()) {
+                        binding.progressBar.isVisible = false
+                        adapter.setReviews(ArrayList(it.status.data))
+
+                    }
+                }
+                is Error -> {
+                    binding.progressBar.isVisible = false
+                    Toast.makeText(requireContext(), "Failed to load movie's reviews", Toast.LENGTH_SHORT).show()
+                }
+
+            }
+
         }
 
         arguments?.getInt("id")?.let {
@@ -117,6 +141,8 @@ class SingleMovieFragment : Fragment() {
             .into(binding.moviePoster)
     }
 
+
+
     private fun addMovieToFavorites(movie: FavoriteMovie) {
         viewModel.addToFavorites(movie)
         Toast.makeText(requireContext(), "Added to favorites", Toast.LENGTH_SHORT).show()
@@ -125,5 +151,12 @@ class SingleMovieFragment : Fragment() {
     private fun deleteFavoriteMovie(movie: FavoriteMovie) {
         viewModel.removeFromFavorites(movie)
         Toast.makeText(requireContext(), "Removed from favorites", Toast.LENGTH_SHORT).show()
+    }
+
+    override fun onReviewClick(reviewId: String) {
+        findNavController().navigate(
+            R.id.action_singleMovieFragment_to_singleReviewFragment,
+            bundleOf("id" to reviewId)
+        )
     }
 }

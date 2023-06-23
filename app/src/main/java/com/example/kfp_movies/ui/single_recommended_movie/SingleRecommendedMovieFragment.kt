@@ -36,12 +36,17 @@ class SingleRecommendedMovieFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val activity = requireActivity()
+        lateinit var title: String
+
         viewModel.movie.observe(viewLifecycleOwner) {
             when (it.status) {
                 is Loading -> binding.progressBar.isVisible = true
                 is Success -> {
                     if (it.status.data != null) {
                         binding.progressBar.isVisible = false
+                        title = it.status.data.title.toString()
+                        setToolbarTitle(activity, title)
                         updateRecommendedMovie(it.status.data!!)
                     }
                 }

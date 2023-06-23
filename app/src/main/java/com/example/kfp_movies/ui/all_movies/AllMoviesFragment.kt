@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.appcompat.widget.Toolbar
 import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
@@ -16,6 +17,7 @@ import com.example.kfp_movies.databinding.MoviesFragmentBinding
 import com.example.kfp_movies.utils.Loading
 import com.example.kfp_movies.utils.Success
 import com.example.kfp_movies.utils.autoCleared
+import com.example.kfp_movies.utils.setToolbarTitle
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -26,6 +28,10 @@ class AllMoviesFragment : Fragment(), MoviesAdapter.MovieItemListener {
     private val viewModel: AllMoviesViewModel by viewModels()
 
     private lateinit var adapter: MoviesAdapter
+
+    private lateinit var toolbar: Toolbar // Add this line to declare the Toolbar instance
+
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -39,6 +45,10 @@ class AllMoviesFragment : Fragment(), MoviesAdapter.MovieItemListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        val activity = requireActivity()
+        val title = getString(R.string.app_name)
+        setToolbarTitle(activity, title)
 
         adapter = MoviesAdapter(this)
         binding.search.setOnQueryTextListener(object :

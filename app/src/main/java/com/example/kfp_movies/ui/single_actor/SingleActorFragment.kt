@@ -37,6 +37,8 @@ class SingleActorFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val activity = requireActivity()
+        lateinit var title: String
 
         viewModel.actor.observe(viewLifecycleOwner) {
             when (it.status) {
@@ -44,6 +46,8 @@ class SingleActorFragment : Fragment() {
                 is Success -> {
                     if (it.status.data != null) {
                         binding.progressBar.isVisible = false
+                        title = it.status.data.name.toString()
+                        setToolbarTitle(activity, title)
                         updateActor(it.status.data!!)
                     }
                 }

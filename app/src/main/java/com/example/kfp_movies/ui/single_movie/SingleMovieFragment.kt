@@ -36,12 +36,18 @@ class SingleMovieFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        val activity = requireActivity()
+        lateinit var title: String
+
         viewModel.movie.observe(viewLifecycleOwner) {
             when (it.status) {
                 is Loading -> binding.progressBar.isVisible = true
                 is Success -> {
                     if (it.status.data != null) {
                         binding.progressBar.isVisible = false
+                        title = it.status.data.title.toString()
+                        setToolbarTitle(activity, title)
                         updateMovie(it.status.data!!)
                     }
                 }
@@ -60,7 +66,7 @@ class SingleMovieFragment : Fragment() {
         binding.showActorsBtn.setOnClickListener {
             findNavController().navigate(
                 R.id.action_singleMovieFragment_to_allActorsFragment,
-                bundleOf("id" to movieId)
+                bundleOf("id" to movieId, "movieTitle" to title)
             )
         }
         binding.showRecommendationsBtn.setOnClickListener {

@@ -18,6 +18,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.kfp_movies.R
 import com.example.kfp_movies.databinding.SimilarFragmentBinding
+import com.example.kfp_movies.utils.setToolbarTitle
 
 @AndroidEntryPoint
 class SimilarFragment : Fragment(), SimilarAdapter.SimilarItemListener {
@@ -38,6 +39,10 @@ class SimilarFragment : Fragment(), SimilarAdapter.SimilarItemListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        val activity = requireActivity()
+        val title = getString(R.string.similar_fragment_title)
+        setToolbarTitle(activity, title)
 
         adapter = SimilarAdapter(this)
         binding.similarRv.layoutManager = LinearLayoutManager(requireContext())

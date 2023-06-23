@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.kfp_movies.R
 import com.example.kfp_movies.databinding.FavoriteFragmentBinding
 import com.example.kfp_movies.utils.autoCleared
+import com.example.kfp_movies.utils.setToolbarTitle
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -38,6 +39,10 @@ class AllFavoriteMoviesFragment : Fragment(), FavoriteMoviesAdapter.FavoriteItem
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        val activity = requireActivity()
+        val title = getString(R.string.favorite_movies_fragment_title)
+        setToolbarTitle(activity, title)
 
         adapter = FavoriteMoviesAdapter(this)
         binding.favoriteRv.layoutManager = LinearLayoutManager(requireContext())

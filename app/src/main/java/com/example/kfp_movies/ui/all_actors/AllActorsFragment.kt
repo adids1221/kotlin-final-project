@@ -1,7 +1,6 @@
 package com.example.kfp_movies.ui.all_actors
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,6 +16,7 @@ import com.example.kfp_movies.databinding.ActorsFragmentBinding
 import com.example.kfp_movies.utils.Loading
 import com.example.kfp_movies.utils.Success
 import com.example.kfp_movies.utils.autoCleared
+import com.example.kfp_movies.utils.setToolbarTitle
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -41,6 +41,10 @@ class AllActorsFragment : Fragment(), ActorsAdapter.ActorItemListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val activity = requireActivity()
+        val title = arguments?.getString("movieTitle")
+        setToolbarTitle(activity, "Cast - $title")
+
         adapter = ActorsAdapter(this)
         binding.actorsRv.layoutManager = GridLayoutManager(requireContext(), 3)
         binding.actorsRv.adapter = adapter
@@ -55,7 +59,6 @@ class AllActorsFragment : Fragment(), ActorsAdapter.ActorItemListener {
                     if (!it.status.data.isNullOrEmpty()) {
                         binding.progressBar.isVisible = false
                         adapter.setActors(ArrayList(it.status.data))
-
                     }
                 }
                 is Error -> {
@@ -66,9 +69,6 @@ class AllActorsFragment : Fragment(), ActorsAdapter.ActorItemListener {
             }
         }
         arguments?.getInt("id")?.let {
-            Log.d(it.toString(), it.toString())
-
-
             viewModel.setId(it)
         }
 

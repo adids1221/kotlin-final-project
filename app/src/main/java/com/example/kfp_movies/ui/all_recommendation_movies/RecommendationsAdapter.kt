@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.kfp_movies.R
@@ -36,7 +37,7 @@ class RecommendationsAdapter(private val listener: RecommendedItemListener) :
             itemBinding.movieDescription.text = "${item.overview} "
             itemBinding.itemRatingBar.rating = item.vote_average?.let { getRating(it) }!!
             itemBinding.movieReleaseDate.text = item.release_date?.let { reformatDate(it) }
-              Glide.with(itemBinding.root)
+            Glide.with(itemBinding.root)
                 .load("https://image.tmdb.org/t/p/w500${movie.poster_path}")
                 .placeholder(R.drawable.glide_placeholder)
                 .centerCrop()
@@ -60,8 +61,15 @@ class RecommendationsAdapter(private val listener: RecommendedItemListener) :
         return RecommendedViewHolder(binding, listener)
     }
 
-    override fun onBindViewHolder(holder: RecommendedViewHolder, position: Int) =
+    override fun onBindViewHolder(holder: RecommendedViewHolder, position: Int) {
         holder.bind(movies[position])
+        holder.itemView.startAnimation(
+            AnimationUtils.loadAnimation(
+                holder.itemView.context,
+                R.anim.slide_left
+            )
+        )
+    }
 
 
     override fun getItemCount() = movies.size

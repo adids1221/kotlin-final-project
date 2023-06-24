@@ -1,7 +1,6 @@
 package com.example.kfp_movies.ui.all_similar_movies
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -55,10 +54,17 @@ class SimilarFragment : Fragment(), SimilarAdapter.SimilarItemListener {
             when (it.status) {
                 is Loading -> binding.progressBar.isVisible = true
                 is Success -> {
-                    Log.d("Success, similar:", it.status.data.toString())
                     if (!it.status.data.isNullOrEmpty()) {
                         binding.progressBar.isVisible = false
+                        binding.emptyLinearLayout.visibility = View.GONE
+                        binding.emptyListImageView.visibility = View.GONE
+                        binding.emptyTitle.visibility = View.GONE
                         adapter.setMovies(ArrayList(it.status.data))
+                    } else {
+                        binding.progressBar.isVisible = false
+                        binding.emptyListImageView.visibility = View.VISIBLE
+                        binding.emptyTitle.visibility = View.VISIBLE
+                        binding.floatingActionButton.visibility = View.GONE
                     }
                 }
                 is Error -> {

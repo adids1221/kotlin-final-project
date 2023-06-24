@@ -35,9 +35,12 @@
     <string name="search_view_query_hint">Search...</string>
     <string name="empty_list_icon" translatable="false">empty_list_icon</string>
     <string name="empty_favRv_text">I cannot believe you don\'t have any favorite movies yet.</string>
+    <string name="empty_recommendations">There are no recommendations currently.</string>
+    <string name="empty_similar">There are no similar movies currently.</string>
     <string name="no_internet_connection_title">No Internet Connection</string>
     <string name="check_connection_subtitle">Check your Internet Connection and Try Again</string>
     <string name="try_again_connection">Try Again</string>
     <string name="internet_connected">Internet connected</string>
     <string name="internet_disconnected">Internet disconnected</string>
+    <string name="empty_rv">We don\'t have data to display yet.</string>
 </resources>

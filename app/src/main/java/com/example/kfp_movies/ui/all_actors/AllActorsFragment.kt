@@ -44,7 +44,7 @@ class AllActorsFragment : Fragment(), ActorsAdapter.ActorItemListener {
         val activity = requireActivity()
         val title = arguments?.getString("movieTitle")
         val castTitle = getString(R.string.all_actors_title_cast)
-        setToolbarTitle(activity, "$castTitle - $title")
+        setToolbarTitle(activity, "$castTitle $title")
 
         adapter = ActorsAdapter(this)
         binding.actorsRv.layoutManager = GridLayoutManager(requireContext(), 3)
@@ -59,7 +59,15 @@ class AllActorsFragment : Fragment(), ActorsAdapter.ActorItemListener {
                 is Success -> {
                     if (!it.status.data.isNullOrEmpty()) {
                         binding.progressBar.isVisible = false
+                        binding.emptyLinearLayout.visibility = View.GONE
+                        binding.emptyListImageView.visibility = View.GONE
+                        binding.emptyTitle.visibility = View.GONE
                         adapter.setActors(ArrayList(it.status.data))
+                    } else {
+                        binding.progressBar.isVisible = false
+                        binding.emptyListImageView.visibility = View.VISIBLE
+                        binding.emptyTitle.visibility = View.VISIBLE
+                        binding.floatingActionButton.visibility = View.GONE
                     }
                 }
                 is Error -> {

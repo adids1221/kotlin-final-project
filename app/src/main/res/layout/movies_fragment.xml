@@ -26,7 +26,7 @@
             app:layout_constraintHorizontal_bias="0.737"
             app:layout_constraintStart_toEndOf="@+id/show_fav_btn"
             app:layout_constraintTop_toTopOf="parent"
-            app:queryHint="Search..."
+            app:queryHint="@string/search_view_query_hint"
             app:searchHintIcon="@null"
             app:searchIcon="@drawable/baseline_search_24" />
 

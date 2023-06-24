@@ -3,6 +3,7 @@ package com.example.kfp_movies.ui.all_movies
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
 import android.widget.Filter
 import android.widget.Filterable
 import androidx.recyclerview.widget.RecyclerView
@@ -68,8 +69,16 @@ class MoviesAdapter(private val listener: MovieItemListener) :
         return MovieViewHolder(binding, listener)
     }
 
-    override fun onBindViewHolder(holder: MovieViewHolder, position: Int) =
+    override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
         holder.bind(moviesFilterList[position])
+        holder.itemView.startAnimation(
+            AnimationUtils.loadAnimation(
+                holder.itemView.context,
+                R.anim.slide_left
+            )
+        )
+    }
+
 
     override fun getFilter(): Filter {
         return object : Filter() {

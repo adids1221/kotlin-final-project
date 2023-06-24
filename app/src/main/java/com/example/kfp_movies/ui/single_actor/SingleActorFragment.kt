@@ -36,7 +36,6 @@ class SingleActorFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         val activity = requireActivity()
         lateinit var title: String
 

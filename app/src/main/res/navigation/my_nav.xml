@@ -9,40 +9,71 @@
         android:id="@+id/allMoviesFragment"
         android:name="com.example.kfp_movies.ui.all_movies.AllMoviesFragment"
         android:label="movies_fragment"
-        tools:layout="@layout/movies_fragment" >
+        tools:layout="@layout/movies_fragment">
         <action
             android:id="@+id/action_allMoviesFragment_to_singleMovieFragment"
-            app:destination="@id/singleMovieFragment" />
+            app:destination="@id/singleMovieFragment"
+            app:enterAnim="@anim/slide_in_bottom"
+            app:exitAnim="@anim/fade_in"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/slide_out_bottom"
+            app:popUpTo="@id/allMoviesFragment" />
         <action
             android:id="@+id/action_allMoviesFragment_to_allFavoriteMoviesFragment"
-            app:destination="@id/allFavoriteMoviesFragment" />
+            app:destination="@id/allFavoriteMoviesFragment"
+            app:popUpTo="@id/allMoviesFragment" />
     </fragment>
     <fragment
         android:id="@+id/singleMovieFragment"
         android:name="com.example.kfp_movies.ui.single_movie.SingleMovieFragment"
         android:label="single_movie_fragment"
-        tools:layout="@layout/single_movie_fragment" >
+        tools:layout="@layout/single_movie_fragment">
         <action
             android:id="@+id/action_singleMovieFragment_to_allActorsFragment"
-            app:destination="@id/allActorsFragment" />
+            app:destination="@id/allActorsFragment"
+            app:enterAnim="@anim/from_left"
+            app:exitAnim="@anim/to_right"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@android:anim/fade_out"
+            app:popUpTo="@id/singleMovieFragment" />
         <action
             android:id="@+id/action_singleMovieFragment_to_similarFragment3"
-            app:destination="@id/similarFragment3" />
+            app:destination="@id/similarFragment3"
+            app:enterAnim="@anim/from_left"
+            app:exitAnim="@anim/to_right"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@android:anim/fade_out"
+            app:popUpTo="@id/singleMovieFragment" />
         <action
             android:id="@+id/action_singleMovieFragment_to_recommendationsFragment2"
-            app:destination="@id/recommendationsFragment2" />
+            app:destination="@id/recommendationsFragment2"
+            app:enterAnim="@anim/from_left"
+            app:exitAnim="@anim/to_right"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@android:anim/fade_out"
+            app:popUpTo="@id/singleMovieFragment" />
         <action
             android:id="@+id/action_singleMovieFragment_to_singleReviewFragment"
-            app:destination="@id/singleReviewFragment" />
+            app:destination="@id/singleReviewFragment"
+            app:enterAnim="@anim/from_left"
+            app:exitAnim="@anim/to_right"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@android:anim/fade_out"
+            app:popUpTo="@id/singleMovieFragment" />
     </fragment>
     <fragment
         android:id="@+id/allActorsFragment"
         android:name="com.example.kfp_movies.ui.all_actors.AllActorsFragment"
         android:label="actors_fragment"
-        tools:layout="@layout/actors_fragment" >
+        tools:layout="@layout/actors_fragment">
         <action
             android:id="@+id/action_allActorsFragment_to_singleActorFragment"
-            app:destination="@id/singleActorFragment" />
+            app:destination="@id/singleActorFragment"
+            app:enterAnim="@anim/slide_in_top"
+            app:exitAnim="@anim/fade_in"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/slide_out_bottom"
+            app:popUpTo="@id/allActorsFragment" />
     </fragment>
     <fragment
         android:id="@+id/singleActorFragment"
@@ -53,10 +84,15 @@
         android:id="@+id/similarFragment3"
         android:name="com.example.kfp_movies.ui.all_similar_movies.SimilarFragment"
         android:label="similar_fragment"
-        tools:layout="@layout/similar_fragment" >
+        tools:layout="@layout/similar_fragment">
         <action
             android:id="@+id/action_similarFragment3_to_singleSimilarMovieFragment"
-            app:destination="@id/singleSimilarMovieFragment" />
+            app:destination="@id/singleSimilarMovieFragment"
+            app:enterAnim="@anim/slide_in_bottom"
+            app:exitAnim="@anim/fade_in"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/slide_out_bottom"
+            app:popUpTo="@id/similarFragment3" />
     </fragment>
     <fragment
         android:id="@+id/singleSimilarMovieFragment"
@@ -66,10 +102,15 @@
         android:id="@+id/recommendationsFragment2"
         android:name="com.example.kfp_movies.ui.all_recommendation_movies.RecommendationsFragment"
         android:label="recommendations_fragment"
-        tools:layout="@layout/recommendations_fragment" >
+        tools:layout="@layout/recommendations_fragment">
         <action
             android:id="@+id/action_recommendationsFragment2_to_singleRecommendedMovieFragment"
-            app:destination="@id/singleRecommendedMovieFragment" />
+            app:destination="@id/singleRecommendedMovieFragment"
+            app:enterAnim="@anim/slide_in_bottom"
+            app:exitAnim="@anim/fade_in"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/slide_out_bottom"
+            app:popUpTo="@id/recommendationsFragment2" />
     </fragment>
     <fragment
         android:id="@+id/singleRecommendedMovieFragment"
@@ -80,10 +121,15 @@
         android:id="@+id/allFavoriteMoviesFragment"
         android:name="com.example.kfp_movies.ui.all_favorite_movies.AllFavoriteMoviesFragment"
         android:label="favorite_fragment"
-        tools:layout="@layout/favorite_fragment" >
+        tools:layout="@layout/favorite_fragment">
         <action
             android:id="@+id/action_allFavoriteMoviesFragment_to_singleMovieFragment"
-            app:destination="@id/singleMovieFragment" />
+            app:destination="@id/singleMovieFragment"
+            app:enterAnim="@anim/slide_in_bottom"
+            app:exitAnim="@anim/fade_in"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/slide_out_bottom"
+            app:popUpTo="@id/allFavoriteMoviesFragment" />
     </fragment>
     <fragment
         android:id="@+id/singleReviewFragment"

@@ -9,7 +9,7 @@
     <string name="poster_desc">movie poster image</string>
     <string name="remove_all_confirmation_toast">Movies removed successfully</string>
     <string name="fab_content_desc">Scroll to the top</string>
-    <string name="insert_image">drawable dsc</string>
+    <string name="insert_image">drawable _</string>
     <string name="movie_title_placeholder">Movie Title</string>
     <string name="review_author_placeholder">Review Author</string>
     <string name="review_content_placeholder">Review Content</string>

@@ -64,7 +64,7 @@ class SingleMovieFragment : Fragment(), SingleMovieReviewsAdapter.ReviewItemList
 
             }
         }
-        viewModel.reviews.observe(viewLifecycleOwner){
+        viewModel.reviews.observe(viewLifecycleOwner) {
             when (it.status) {
                 is Loading -> binding.progressBar.isVisible = true
                 is Success -> {
@@ -76,7 +76,11 @@ class SingleMovieFragment : Fragment(), SingleMovieReviewsAdapter.ReviewItemList
                 }
                 is Error -> {
                     binding.progressBar.isVisible = false
-                    Toast.makeText(requireContext(), "Failed to load movie's reviews", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        requireContext(),
+                        getString(R.string.failed_to_load_reviews),
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
 
             }
@@ -142,15 +146,15 @@ class SingleMovieFragment : Fragment(), SingleMovieReviewsAdapter.ReviewItemList
     }
 
 
-
     private fun addMovieToFavorites(movie: FavoriteMovie) {
         viewModel.addToFavorites(movie)
-        Toast.makeText(requireContext(), "Added to favorites", Toast.LENGTH_SHORT).show()
+        Toast.makeText(requireContext(), getString(R.string.add_to_fav), Toast.LENGTH_SHORT).show()
     }
 
     private fun deleteFavoriteMovie(movie: FavoriteMovie) {
         viewModel.removeFromFavorites(movie)
-        Toast.makeText(requireContext(), "Removed from favorites", Toast.LENGTH_SHORT).show()
+        Toast.makeText(requireContext(), getString(R.string.remove_from_fav), Toast.LENGTH_SHORT)
+            .show()
     }
 
     override fun onReviewClick(reviewId: String) {

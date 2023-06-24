@@ -19,4 +19,7 @@ interface MovieDao {
     suspend fun insertMovies(movies: List<Movie>)
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertMovie(movie: Movie)
+
+    @Query("SELECT * FROM movies ORDER BY timestamp")
+    suspend fun getAllSuspend(): List<Movie>
 }

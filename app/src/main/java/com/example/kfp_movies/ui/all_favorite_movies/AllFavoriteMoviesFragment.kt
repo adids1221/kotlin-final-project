@@ -51,9 +51,18 @@ class AllFavoriteMoviesFragment : Fragment(), FavoriteMoviesAdapter.FavoriteItem
             binding.favoriteRv.smoothScrollToPosition(0)
         }
 
-        viewModel.movies.observe(viewLifecycleOwner) {
-            adapter.setMovies(it)
+        viewModel.movies.observe(viewLifecycleOwner) { movies ->
+            if (movies.isNotEmpty()) {
+                binding.emptyLinearLayout.visibility = View.GONE
+                binding.emptyListImageView.visibility = View.GONE
+            } else {
+                binding.emptyLinearLayout.visibility = View.VISIBLE
+                binding.emptyListImageView.visibility = View.VISIBLE
+                binding.floatingActionButton.visibility = View.GONE
+            }
+            adapter.setMovies(movies)
         }
+
 
         val itemTouchHelper = ItemTouchHelper(object : ItemTouchHelper.Callback() {
             override fun getMovementFlags(
@@ -85,19 +94,12 @@ class AllFavoriteMoviesFragment : Fragment(), FavoriteMoviesAdapter.FavoriteItem
                     setNegativeButton(getString(R.string.confirmation_dialog_cancel)) { _, _ ->
                         binding.favoriteRv.adapter!!.notifyItemChanged(viewHolder.adapterPosition)
                     }
-
-
                 }.show()
-
-
             }
-
-            // Implement other necessary methods for item touch handling if needed
         })
 
         itemTouchHelper.attachToRecyclerView(binding.favoriteRv)
     }
-
 
     override fun onMovieClick(movieId: Int) {
         findNavController().navigate(

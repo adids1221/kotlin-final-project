@@ -89,6 +89,7 @@
             android:stepSize="0.5" />
 
         <LinearLayout
+            android:id="@+id/movie_show_panel"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"

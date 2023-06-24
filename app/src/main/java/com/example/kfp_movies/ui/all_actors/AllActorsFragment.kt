@@ -44,7 +44,7 @@ class AllActorsFragment : Fragment(), ActorsAdapter.ActorItemListener {
         val activity = requireActivity()
         val title = arguments?.getString("movieTitle")
         val castTitle = getString(R.string.all_actors_title_cast)
-        setToolbarTitle(activity, "$castTitle $title")
+        setToolbarTitle(activity, "$castTitle - $title")
 
         adapter = ActorsAdapter(this)
         binding.actorsRv.layoutManager = GridLayoutManager(requireContext(), 3)

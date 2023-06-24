@@ -19,18 +19,15 @@ import com.example.kfp_movies.R
 import com.example.kfp_movies.data.models.FavoriteMovie
 import dagger.hilt.android.AndroidEntryPoint
 import com.example.kfp_movies.databinding.SingleMovieFragmentBinding
-
 import com.example.kfp_movies.data.models.Movie
 import com.example.kfp_movies.utils.*
 
 @AndroidEntryPoint
 class SingleMovieFragment : Fragment(), SingleMovieReviewsAdapter.ReviewItemListener {
     private var binding: SingleMovieFragmentBinding by autoCleared()
-
     private val viewModel: SingleMovieViewModel by viewModels()
-
-
     private lateinit var adapter: SingleMovieReviewsAdapter
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -42,7 +39,6 @@ class SingleMovieFragment : Fragment(), SingleMovieReviewsAdapter.ReviewItemList
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         val activity = requireActivity()
         lateinit var title: String
         adapter = SingleMovieReviewsAdapter(this)
@@ -82,11 +78,10 @@ class SingleMovieFragment : Fragment(), SingleMovieReviewsAdapter.ReviewItemList
                     if (isConnectedToInternet())
                         Toast.makeText(
                             requireContext(),
-                            "Failed to load movie's reviews",
+                            getString(R.string.failed_to_load_reviews),
                             Toast.LENGTH_SHORT
                         ).show()
                 }
-
             }
 
         }
@@ -170,12 +165,13 @@ class SingleMovieFragment : Fragment(), SingleMovieReviewsAdapter.ReviewItemList
 
     private fun addMovieToFavorites(movie: FavoriteMovie) {
         viewModel.addToFavorites(movie)
-        Toast.makeText(requireContext(), "Added to favorites", Toast.LENGTH_SHORT).show()
+        Toast.makeText(requireContext(), getString(R.string.add_to_fav), Toast.LENGTH_SHORT).show()
     }
 
     private fun deleteFavoriteMovie(movie: FavoriteMovie) {
         viewModel.removeFromFavorites(movie)
-        Toast.makeText(requireContext(), "Removed from favorites", Toast.LENGTH_SHORT).show()
+        Toast.makeText(requireContext(), getString(R.string.remove_from_fav), Toast.LENGTH_SHORT)
+            .show()
     }
 
     override fun onReviewClick(reviewId: String) {

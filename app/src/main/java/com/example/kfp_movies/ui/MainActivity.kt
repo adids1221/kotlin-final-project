@@ -1,6 +1,7 @@
 package com.example.kfp_movies.ui
 
 import android.content.Context
+import android.content.IntentFilter
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import androidx.appcompat.app.AppCompatActivity
@@ -13,20 +14,25 @@ import androidx.navigation.ui.setupWithNavController
 import com.example.kfp_movies.R
 import com.example.kfp_movies.data.local_db.AppDatabase
 import com.example.kfp_movies.databinding.ActivityMainBinding
+import com.example.kfp_movies.utils.ConnectivityReceiver
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
+    private lateinit var connectivityReceiver: ConnectivityReceiver
     private lateinit var connectivityManager: ConnectivityManager
     private lateinit var appDatabase: AppDatabase
+    private var connectionLost: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        connectivityReceiver = ConnectivityReceiver(this)
         connectivityManager = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         appDatabase = AppDatabase.getDatabase(this)
         lifecycleScope.launch {
             if (!isConnectedToInternet() && isDatabaseEmpty()) {
+                connectionLost = true
                 showNoConnectivityLayout()
             } else {
                 showContentView()
@@ -36,6 +42,17 @@ class MainActivity : AppCompatActivity() {
 
     fun setToolbarTitle(title: String) {
         supportActionBar?.title = title
+    }
+
+    override fun onStart() {
+        super.onStart()
+        val filter = IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION)
+        registerReceiver(connectivityReceiver, filter)
+    }
+
+    override fun onStop() {
+        super.onStop()
+        unregisterReceiver(connectivityReceiver)
     }
 
     private fun isConnectedToInternet(): Boolean {
@@ -53,6 +70,7 @@ class MainActivity : AppCompatActivity() {
         tryAgainButton.setOnClickListener {
             // Check for internet connectivity again when "Try Again" button is clicked
             if (isConnectedToInternet()) {
+                connectionLost = false
                 recreate() // Reload the activity to proceed with regular initialization
             }
         }

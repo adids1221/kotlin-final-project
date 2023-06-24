@@ -67,7 +67,7 @@ class SingleMovieFragment : Fragment(), SingleMovieReviewsAdapter.ReviewItemList
 
             }
         }
-        viewModel.reviews.observe(viewLifecycleOwner){
+        viewModel.reviews.observe(viewLifecycleOwner) {
             when (it.status) {
                 is Loading -> binding.progressBar.isVisible = true
                 is Success -> {
@@ -79,7 +79,12 @@ class SingleMovieFragment : Fragment(), SingleMovieReviewsAdapter.ReviewItemList
                 }
                 is Error -> {
                     binding.progressBar.isVisible = false
-                    Toast.makeText(requireContext(), "Failed to load movie's reviews", Toast.LENGTH_SHORT).show()
+                    if (isConnectedToInternet())
+                        Toast.makeText(
+                            requireContext(),
+                            "Failed to load movie's reviews",
+                            Toast.LENGTH_SHORT
+                        ).show()
                 }
 
             }
@@ -117,11 +122,15 @@ class SingleMovieFragment : Fragment(), SingleMovieReviewsAdapter.ReviewItemList
     }
 
     private fun checkInternetConnection() {
-        binding.movieShowPanel.isVisible = isConnectedToInternet()
+        val isConnected = isConnectedToInternet()
+        binding.movieShowPanel.isVisible = isConnected
+        binding.reviewsRv.isVisible = isConnected
+        binding.reviewsSection.isVisible = isConnected
     }
 
     private fun isConnectedToInternet(): Boolean {
-        val connectivityManager = requireContext().getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        val connectivityManager =
+            requireContext().getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         val networkCapabilities = connectivityManager.activeNetwork?.let {
             connectivityManager.getNetworkCapabilities(it)
         }

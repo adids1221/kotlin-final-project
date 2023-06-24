@@ -53,5 +53,9 @@
     <string name="invalid_form_poster">Poster: Missing Movie Poster</string>
     <string name="invalid_form_alert_title">Invalid Form</string>
     <string name="invalid_form_alert_positive_btn">Okay</string>
-
+    <string name="empty_list_icon">empty_list_icon</string>
+    <string name="empty_favRv_text">I cannot believe you don\'t have any favorite movies yet.</string>
+    <string name="no_internet_connection_title">No Internet Connection</string>
+    <string name="check_connection_subtitle">Check your Internet Connection and Try Again</string>
+    <string name="try_again_connection">Try Again</string>
 </resources>

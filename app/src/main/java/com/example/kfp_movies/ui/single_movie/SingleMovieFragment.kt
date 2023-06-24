@@ -1,5 +1,8 @@
 package com.example.kfp_movies.ui.single_movie
 
+import android.content.Context
+import android.net.ConnectivityManager
+import android.net.NetworkCapabilities
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -83,6 +86,8 @@ class SingleMovieFragment : Fragment(), SingleMovieReviewsAdapter.ReviewItemList
 
         }
 
+        checkInternetConnection()
+
         arguments?.getInt("id")?.let {
             viewModel.setId(it)
         }
@@ -109,6 +114,18 @@ class SingleMovieFragment : Fragment(), SingleMovieReviewsAdapter.ReviewItemList
         viewModel.isFavoriteMovie(movieId).observe(viewLifecycleOwner) { isFavorite ->
             binding.favStar.isChecked = isFavorite
         }
+    }
+
+    private fun checkInternetConnection() {
+        binding.movieShowPanel.isVisible = isConnectedToInternet()
+    }
+
+    private fun isConnectedToInternet(): Boolean {
+        val connectivityManager = requireContext().getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        val networkCapabilities = connectivityManager.activeNetwork?.let {
+            connectivityManager.getNetworkCapabilities(it)
+        }
+        return networkCapabilities?.hasCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET) == true
     }
 
     private fun updateMovie(movie: Movie) {
@@ -140,7 +157,6 @@ class SingleMovieFragment : Fragment(), SingleMovieReviewsAdapter.ReviewItemList
             .centerCrop()
             .into(binding.moviePoster)
     }
-
 
 
     private fun addMovieToFavorites(movie: FavoriteMovie) {

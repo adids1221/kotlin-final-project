@@ -20,7 +20,8 @@ data class Actor (
     val character:String? = null,
     val place_of_birth: String? = null,
     val popularity :Double,
-    val profile_path: String? = null
+    val profile_path: String? = null,
+    var movie_id:Int? = null
 ){}
 
 

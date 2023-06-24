@@ -6,11 +6,12 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.example.kfp_movies.data.models.Review
+import com.example.kfp_movies.data.models.SimilarMovie
 
 @Dao
 interface ReviewsDao {
-    @Query("SELECT * FROM reviews")
-    fun getAllReviews(): LiveData<List<Review>>
+    @Query("SELECT * FROM reviews where related_movie_id = :id")
+    fun getAllReviews(id: Int): LiveData<List<Review>>
 
     @Query("SELECT * FROM reviews WHERE id = :id")
     fun getReview(id: String): LiveData<Review>

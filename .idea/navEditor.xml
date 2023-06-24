@@ -135,13 +135,18 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="500" />
-                            <option name="y" value="88" />
+                            <option name="x" value="493" />
+                            <option name="y" value="81" />
                           </Point>
                         </option>
                         <option name="myPositions">
                           <map>
                             <entry key="action_singleMovieFragment_to_allActorsFragment">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                            <entry key="action_singleMovieFragment_to_allFavoriteMoviesFragment">
                               <value>
                                 <LayoutPositions />
                               </value>

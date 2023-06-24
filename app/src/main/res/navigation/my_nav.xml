@@ -35,7 +35,8 @@
             app:exitAnim="@anim/to_right"
             app:popEnterAnim="@anim/fade_in"
             app:popExitAnim="@android:anim/fade_out"
-            app:popUpTo="@id/singleMovieFragment" />
+            app:popUpTo="@id/singleMovieFragment"
+            app:popUpToInclusive="false" />
         <action
             android:id="@+id/action_singleMovieFragment_to_similarFragment3"
             app:destination="@id/similarFragment3"

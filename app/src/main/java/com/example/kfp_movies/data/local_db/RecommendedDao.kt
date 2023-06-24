@@ -10,8 +10,8 @@ import com.example.kfp_movies.data.models.SimilarMovie
 
 @Dao
 interface RecommendedDao {
-    @Query("SELECT * FROM recommended_movies where related_movie_id = :id")
-    fun getAllRecommended(id: Int): LiveData<List<RecommendedMovie>>
+    @Query("SELECT * FROM recommended_movies")
+    fun getAllRecommended(): LiveData<List<RecommendedMovie>>
 
 
     @Query("SELECT * FROM recommended_movies WHERE id = :id")

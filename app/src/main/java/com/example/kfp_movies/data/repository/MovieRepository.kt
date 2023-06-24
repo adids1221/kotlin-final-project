@@ -33,9 +33,10 @@ class MovieRepository @Inject constructor(
     )
 
     fun getCasts(id: Int) = performFetchingAndSaving(
-        { actorsLocalDataSource.getAllActors(id) },
+        { actorsLocalDataSource.getAllActors() },
         { remoteDataSource.getCasts(id) },
-        {actorsLocalDataSource.insertActors(it.cast)}
+        {actorsLocalDataSource.clearActorsTable()
+            actorsLocalDataSource.insertActors(it.cast)}
 
 
     )
@@ -47,9 +48,10 @@ class MovieRepository @Inject constructor(
     )
 
     fun getSimilarMovies(id: Int) = performFetchingAndSaving(
-        { similarLocalDataSource.getAllSimilar(id) },
+        { similarLocalDataSource.getAllSimilar() },
         { remoteDataSource.getSimilarMovies(id) },
-        {similarLocalDataSource.insertSimilarMovies(it.results)}
+        {similarLocalDataSource.clearSimilarTable()
+            similarLocalDataSource.insertSimilarMovies(it.results)}
 
     )
 
@@ -60,9 +62,10 @@ class MovieRepository @Inject constructor(
     )
 
     fun getRecommendationsMovies(id: Int) = performFetchingAndSaving(
-        { recommendedLocalDataSource.getAllRecommended(id) },
+        { recommendedLocalDataSource.getAllRecommended() },
         { remoteDataSource.getRecommendations(id) },
-        { recommendedLocalDataSource.insertRecommendedMovies(it.results) }
+        {recommendedLocalDataSource.clearRecommendedTable()
+            recommendedLocalDataSource.insertRecommendedMovies(it.results) }
     )
 
     fun getRecommendedMovie(id: Int) = performFetchingAndSaving(
@@ -88,9 +91,11 @@ class MovieRepository @Inject constructor(
     }
 
     fun getReviews(id: Int) = performFetchingAndSaving(
-        { reviewLocalDataSource.getAllReviews(id) },
+        { reviewLocalDataSource.getAllReviews() },
         { remoteDataSource.getReviews(id) },
-        { reviewLocalDataSource.insertReviews(it.results) }
+        {reviewLocalDataSource.clearReviewsTable()
+            reviewLocalDataSource.insertReviews(it.results)
+        }
     )
 
      fun getReview(id:String): LiveData<Review> {

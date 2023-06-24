@@ -15,7 +15,6 @@ data class Review(
     val created_at: String? = null,
     val content: String? = null,
     val author: String?,
-    var related_movie_id:Int? = null,
     @Embedded
     val author_details: AuthorDetails?,
     ) {

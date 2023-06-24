@@ -6,12 +6,13 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.example.kfp_movies.data.models.RecommendedMovie
+import com.example.kfp_movies.data.models.SimilarMovie
 
 @Dao
 interface RecommendedDao {
+    @Query("SELECT * FROM recommended_movies where related_movie_id = :id")
+    fun getAllRecommended(id: Int): LiveData<List<RecommendedMovie>>
 
-    @Query("SELECT * FROM recommended_movies")
-    fun getAllRecommended(): LiveData<List<RecommendedMovie>>
 
     @Query("SELECT * FROM recommended_movies WHERE id = :id")
     fun getRecommendedMovie(id: Int): LiveData<RecommendedMovie>

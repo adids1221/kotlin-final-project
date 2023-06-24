@@ -23,6 +23,7 @@ class RecommendedMovie(
     val creditId: String? = null,
     val order: Int,
     var type: Int = 0,
+    var related_movie_id:Int? = null
 
     ) {
 }

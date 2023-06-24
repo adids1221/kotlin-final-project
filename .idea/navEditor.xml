@@ -38,6 +38,15 @@
                             <option name="y" value="440" />
                           </Point>
                         </option>
+                        <option name="myPositions">
+                          <map>
+                            <entry key="action_allFavoriteMoviesFragment_to_singleMovieFragment">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                          </map>
+                        </option>
                       </LayoutPositions>
                     </value>
                   </entry>
@@ -52,6 +61,11 @@
                         </option>
                         <option name="myPositions">
                           <map>
+                            <entry key="action_allMoviesFragment_to_allFavoriteMoviesFragment">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
                             <entry key="action_allMoviesFragment_to_singleMovieFragment">
                               <value>
                                 <LayoutPositions />
@@ -121,8 +135,8 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="276" />
-                            <option name="y" value="27" />
+                            <option name="x" value="274" />
+                            <option name="y" value="47" />
                           </Point>
                         </option>
                         <option name="myPositions">
@@ -154,6 +168,18 @@
                           <Point>
                             <option name="x" value="705" />
                             <option name="y" value="418" />
+                          </Point>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
+                  <entry key="singleReviewFragment">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="207" />
+                            <option name="y" value="-385" />
                           </Point>
                         </option>
                       </LayoutPositions>

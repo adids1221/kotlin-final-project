@@ -33,12 +33,11 @@ class MovieRepository @Inject constructor(
     )
 
     fun getCasts(id: Int) = performFetchingAndSaving(
-        { actorsLocalDataSource.getAllActors() },
+        { actorsLocalDataSource.getAllActors(id) },
         { remoteDataSource.getCasts(id) },
-        {
-            actorsLocalDataSource.clearActorsTable()
-            actorsLocalDataSource.insertActors(it.cast)
-        }
+        {actorsLocalDataSource.insertActors(it.cast)}
+
+
     )
 
     fun getActor(id: Int) = performFetchingAndSaving(
@@ -48,12 +47,10 @@ class MovieRepository @Inject constructor(
     )
 
     fun getSimilarMovies(id: Int) = performFetchingAndSaving(
-        { similarLocalDataSource.getAllSimilar() },
-        { remoteDataSource.getSimilar(id) },
-        {
-            similarLocalDataSource.clearSimilarTable()
-            similarLocalDataSource.insertSimilarMovies(it.results)
-        }
+        { similarLocalDataSource.getAllSimilar(id) },
+        { remoteDataSource.getSimilarMovies(id) },
+        {similarLocalDataSource.insertSimilarMovies(it.results)}
+
     )
 
     fun getSimilarMovie(id: Int) = performFetchingAndSaving(
@@ -63,12 +60,9 @@ class MovieRepository @Inject constructor(
     )
 
     fun getRecommendationsMovies(id: Int) = performFetchingAndSaving(
-        { recommendedLocalDataSource.getAllRecommended() },
+        { recommendedLocalDataSource.getAllRecommended(id) },
         { remoteDataSource.getRecommendations(id) },
-        {
-            recommendedLocalDataSource.clearRecommendedTable()
-            recommendedLocalDataSource.insertRecommendedMovies(it.results)
-        }
+        { recommendedLocalDataSource.insertRecommendedMovies(it.results) }
     )
 
     fun getRecommendedMovie(id: Int) = performFetchingAndSaving(
@@ -94,10 +88,9 @@ class MovieRepository @Inject constructor(
     }
 
     fun getReviews(id: Int) = performFetchingAndSaving(
-        { reviewLocalDataSource.getAllReviews() },
+        { reviewLocalDataSource.getAllReviews(id) },
         { remoteDataSource.getReviews(id) },
-        {reviewLocalDataSource.clearReviewsTable()
-            reviewLocalDataSource.insertReviews(it.results) }
+        { reviewLocalDataSource.insertReviews(it.results) }
     )
 
      fun getReview(id:String): LiveData<Review> {

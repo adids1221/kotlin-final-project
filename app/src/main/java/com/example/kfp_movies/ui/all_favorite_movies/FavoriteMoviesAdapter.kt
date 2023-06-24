@@ -41,7 +41,6 @@ class FavoriteMoviesAdapter(private val listener: FavoriteItemListener) :
                 .into(itemBinding.moviePoster)
         }
 
-
         override fun onClick(v: View?) {
             movie.id?.let { listener.onMovieClick(it) }
         }
@@ -63,11 +62,9 @@ class FavoriteMoviesAdapter(private val listener: FavoriteItemListener) :
     override fun onBindViewHolder(holder: FavoriteViewHolder, position: Int) =
         holder.bind(movies[position])
 
-
     override fun getItemCount() = movies.size
 
     interface FavoriteItemListener {
-
         fun onMovieClick(movieId: Int)
     }
 }

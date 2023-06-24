@@ -3,6 +3,7 @@ package com.example.kfp_movies.ui.all_similar_movies
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.kfp_movies.R
@@ -57,8 +58,15 @@ class SimilarAdapter(private val listener: SimilarItemListener) :
         return SimilarViewHolder(binding, listener)
     }
 
-    override fun onBindViewHolder(holder: SimilarViewHolder, position: Int) =
+    override fun onBindViewHolder(holder: SimilarViewHolder, position: Int) {
         holder.bind(movies[position])
+        holder.itemView.startAnimation(
+            AnimationUtils.loadAnimation(
+                holder.itemView.context,
+                R.anim.slide_left
+            )
+        )
+    }
 
 
     override fun getItemCount() = movies.size

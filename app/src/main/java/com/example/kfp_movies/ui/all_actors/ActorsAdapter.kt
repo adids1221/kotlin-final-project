@@ -3,6 +3,7 @@ package com.example.kfp_movies.ui.all_actors
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.kfp_movies.R
@@ -62,15 +63,21 @@ class ActorsAdapter(private val listener: ActorItemListener) :
         return ActorViewHolder(binding, listener)
     }
 
-    override fun onBindViewHolder(holder: ActorViewHolder, position: Int) =
+    override fun onBindViewHolder(holder: ActorViewHolder, position: Int) {
         holder.bind(actors[position])
+        holder.itemView.startAnimation(
+            AnimationUtils.loadAnimation(
+                holder.itemView.context,
+                R.anim.recycler_view_anim
+            )
+        )
+    }
 
 
     override fun getItemCount() = actors.size
 
 
     interface ActorItemListener {
-
         fun onActorClick(actorId: Int)
     }
 }

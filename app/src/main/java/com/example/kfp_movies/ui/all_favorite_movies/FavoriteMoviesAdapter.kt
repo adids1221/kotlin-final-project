@@ -3,6 +3,7 @@ package com.example.kfp_movies.ui.all_favorite_movies
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.kfp_movies.R
@@ -52,6 +53,7 @@ class FavoriteMoviesAdapter(private val listener: FavoriteItemListener) :
         this.movies.addAll(movies)
         notifyDataSetChanged()
     }
+
     fun favoriteAt(position: Int) = movies[position]
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FavoriteViewHolder {
@@ -60,8 +62,15 @@ class FavoriteMoviesAdapter(private val listener: FavoriteItemListener) :
         return FavoriteViewHolder(binding, listener)
     }
 
-    override fun onBindViewHolder(holder: FavoriteViewHolder, position: Int) =
+    override fun onBindViewHolder(holder: FavoriteViewHolder, position: Int) {
         holder.bind(movies[position])
+        holder.itemView.startAnimation(
+            AnimationUtils.loadAnimation(
+                holder.itemView.context,
+                R.anim.slide_left
+            )
+        )
+    }
 
 
     override fun getItemCount() = movies.size

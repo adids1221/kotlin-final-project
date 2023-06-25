@@ -90,7 +90,9 @@ class SingleMovieFragment : Fragment(), SingleMovieReviewsAdapter.ReviewItemList
         arguments?.getInt("id")?.let {
             viewModel.setId(it)
         }
+
         val movieId = arguments?.getInt("id")
+
         binding.showActorsBtn.setOnClickListener {
             findNavController().navigate(
                 R.id.action_singleMovieFragment_to_allActorsFragment,

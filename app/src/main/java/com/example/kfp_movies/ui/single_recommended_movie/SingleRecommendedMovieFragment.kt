@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.bumptech.glide.Glide
 import com.example.kfp_movies.R
+import com.example.kfp_movies.data.models.FavoriteMovie
 import com.example.kfp_movies.data.models.RecommendedMovie
 import com.example.kfp_movies.databinding.SingleRecommendedMovieBinding
 import com.example.kfp_movies.utils.*
@@ -61,9 +62,33 @@ class SingleRecommendedMovieFragment : Fragment() {
         arguments?.getInt("id")?.let {
             viewModel.setId(it)
         }
+
+        val movieId = arguments?.getInt("id")
+
+        viewModel.isFavoriteMovie(movieId).observe(viewLifecycleOwner) { isFavorite ->
+            binding.favStar.isChecked = isFavorite
+        }
     }
 
     private fun updateRecommendedMovie(movie: RecommendedMovie) {
+        val favoriteMovie = FavoriteMovie(
+            id = movie.id,
+            title = movie.title,
+            overview = movie.overview,
+            release_date = movie.release_date,
+            vote_average = movie.vote_average,
+            poster_path = movie.poster_path
+        )
+
+
+        binding.favStar.setOnCheckedChangeListener { _, isChecked ->
+            if (isChecked) {
+                addMovieToFavorites(favoriteMovie)
+            } else {
+                deleteFavoriteMovie(favoriteMovie)
+            }
+        }
+
         binding.movieTitle.text = movie.title
         binding.movieDescription.text = movie.overview
         binding.movieReleaseDate.text = movie.release_date?.let { reformatDate(it) }
@@ -73,5 +98,16 @@ class SingleRecommendedMovieFragment : Fragment() {
             .placeholder(R.drawable.glide_placeholder)
             .centerCrop()
             .into(binding.moviePoster)
+    }
+
+    private fun addMovieToFavorites(movie: FavoriteMovie) {
+        viewModel.addToFavorites(movie)
+        Toast.makeText(requireContext(), getString(R.string.add_to_fav), Toast.LENGTH_SHORT).show()
+    }
+
+    private fun deleteFavoriteMovie(movie: FavoriteMovie) {
+        viewModel.removeFromFavorites(movie)
+        Toast.makeText(requireContext(), getString(R.string.remove_from_fav), Toast.LENGTH_SHORT)
+            .show()
     }
 }

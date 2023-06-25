@@ -4,5 +4,4 @@ data class ActorsResponse(
     val id:Int,
     var cast:ArrayList<Actor>
 ){
-
 }

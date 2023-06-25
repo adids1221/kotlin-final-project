@@ -8,7 +8,6 @@ data class Actor (
     @PrimaryKey
     val id: Int? = null,
     val adult :Boolean?=null,
-    //val also_known_as: ArrayList<String>? = null,
     val biography: String? = null,
     val birthday: String? = null,
     val deathday: String? = null,

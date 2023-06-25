@@ -83,8 +83,9 @@ class SingleMovieFragment : Fragment(), SingleMovieReviewsAdapter.ReviewItemList
                         ).show()
                 }
             }
-
         }
+
+        checkInternetConnection()
 
         arguments?.getInt("id")?.let {
             viewModel.setId(it)
@@ -112,6 +113,12 @@ class SingleMovieFragment : Fragment(), SingleMovieReviewsAdapter.ReviewItemList
         viewModel.isFavoriteMovie(movieId).observe(viewLifecycleOwner) { isFavorite ->
             binding.favStar.isChecked = isFavorite
         }
+    }
+
+    private fun checkInternetConnection() {
+        val visible = isConnectedToInternet()
+        binding.movieShowPanel.isVisible = visible
+        binding.reviewsLayout.isVisible = visible
     }
 
     private fun isConnectedToInternet(): Boolean {
